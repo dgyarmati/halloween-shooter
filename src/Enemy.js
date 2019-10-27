@@ -47,10 +47,6 @@ class Enemy {
         }
 
         this.updateFire();
-
-        if (this.sprite.position.x < -renderer.width * 0.3) {
-            this.sprite.destroy();
-        }
     }
 
     pressKey(keyCode) {

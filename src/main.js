@@ -7,7 +7,7 @@
 const stage = new PIXI.Container();
 let cloudManager;
 let player;
-let enemy;
+let enemyManager;
 
 PIXI.loader.add([
     "assets/cloud_1.png",
@@ -24,7 +24,7 @@ function init() {
 
     cloudManager = new CloudManager();
     player = new Player();
-    enemy = new Enemy();
+    enemyManager = new EnemyManager();
 
     renderer.render(stage);
 
@@ -34,7 +34,7 @@ function init() {
 function loop() {
     cloudManager.update();
     player.update();
-    enemy.update();
+    enemyManager.update();
 
     Rocket.list.map((element) => {
         element.update();
