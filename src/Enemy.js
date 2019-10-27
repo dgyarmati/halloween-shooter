@@ -8,7 +8,7 @@ class Enemy {
         this.sprite.hitArea = new PIXI.Rectangle(this.sprite.position.x, this.sprite.position.y, 30, 30);
         this.sprite.scale.set(0.4, 0.4);
 
-        this.keyPressed = {32: true, 37: false, 38: false, 39: false, 40: false};
+        this.keyPressed = {37: false, 38: false, 39: false, 40: false};
         this.keyCodesWithDirections = {37: -1, 38: -1, 40: 1};
         this.keyCodes = [37, 38, 40];
 
@@ -84,7 +84,7 @@ class Enemy {
             this.fireCooldown++;
         }
 
-        if (this.keyPressed[32] && this.fireCooldown >= this.fireSpeed) {
+        if (this.fireCooldown >= this.fireSpeed) {
             new EnemyProjectile(this.sprite.position.x, this.sprite.position.y);
             this.fireCooldown = 0;
         }
