@@ -6,6 +6,13 @@ class CollisionHandler {
         }
     }
 
+    destroyPlayerAndEnemyOnCollision(player, enemy) {
+        if (this.hitBoxesIntersect(player.sprite.hitArea, enemy.sprite.hitArea)) {
+            player.isAlive = false;
+            enemy.isAlive = false;
+        }
+    }
+
     destroyEnemyIfHit(enemy, rocket) {
         if (this.hitBoxesIntersect(enemy.sprite.hitArea, rocket.sprite.hitArea)) {
             enemy.isAlive = false;

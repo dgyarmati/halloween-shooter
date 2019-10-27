@@ -1,4 +1,4 @@
-class CloudManager {
+class BackgroundManager {
     constructor() {
         this.cloudsList = [];
 
@@ -8,7 +8,6 @@ class CloudManager {
             this.cloud.anchor.set(0.5, 0.5);
             this.cloud.position.set(renderer.width * 1.3, renderer.height * Math.random());
 
-            // Diversify clouds size
             let minScale = 0.2;
             let maxScale = 1.2;
             let scale = Math.random() * (maxScale - minScale) + minScale;
@@ -19,7 +18,7 @@ class CloudManager {
         }.bind(this), 2000);
     }
 
-    update() {
+    updateBackground() {
         this.cloudsList.forEach(function (element, index, array) {
             element.position.x -= 4;
 

@@ -12,7 +12,7 @@ class EnemyManager {
         }.bind(this), 2000);
     }
 
-    update() {
+    updateEnemies() {
         _enemies.forEach((enemy, index, array) => {
             enemy.update();
             if (!enemy.isAlive || enemy.sprite.position.x < -renderer.width * 0.3) {

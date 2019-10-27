@@ -17,7 +17,7 @@ PIXI.loader.add([
 function init() {
     renderer.backgroundColor = 0x22A7F0;
 
-    backgroundManager = new CloudManager();
+    backgroundManager = new BackgroundManager();
     player = new Player();
     enemyManager = new EnemyManager();
     collisionHandler = new CollisionHandler();
@@ -29,9 +29,7 @@ function init() {
 
 function loop() {
     if (player.isAlive) {
-        backgroundManager.update();
-        player.update();
-        enemyManager.update();
+        backgroundManager.updateBackground();
 
         Rocket.list.forEach((rocket) => {
             rocket.update();
@@ -44,6 +42,13 @@ function loop() {
             projectile.update();
             collisionHandler.destroyPlayerIfHit(player, projectile);
         });
+
+        EnemyManager.list.forEach((enemy) => {
+            collisionHandler.destroyPlayerAndEnemyOnCollision(player, enemy);
+        });
+
+        player.update();
+        enemyManager.updateEnemies();
 
         requestAnimationFrame(loop);
         renderer.render(stage);
