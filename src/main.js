@@ -1,13 +1,8 @@
-/*****************************************************
-
- Main.js
-
- *****************************************************/
-
 const stage = new PIXI.Container();
-let cloudManager;
+let backgroundManager;
 let player;
 let enemyManager;
+let collisionHandler;
 
 PIXI.loader.add([
     "assets/cloud_1.png",
@@ -22,9 +17,10 @@ PIXI.loader.add([
 function init() {
     renderer.backgroundColor = 0x22A7F0;
 
-    cloudManager = new CloudManager();
+    backgroundManager = new CloudManager();
     player = new Player();
     enemyManager = new EnemyManager();
+    collisionHandler = new CollisionHandler();
 
     renderer.render(stage);
 
@@ -32,16 +28,20 @@ function init() {
 }
 
 function loop() {
-    cloudManager.update();
+    backgroundManager.update();
     player.update();
     enemyManager.update();
 
-    Rocket.list.map((element) => {
-        element.update();
+    Rocket.list.forEach((rocket) => {
+        rocket.update();
+        EnemyManager.list.forEach((enemy) => {
+            collisionHandler.destroyEnemyIfHit(enemy, rocket);
+        })
     });
 
-    EnemyProjectile.list.map((element) => {
-        element.update();
+    EnemyProjectile.list.forEach((projectile) => {
+        projectile.update();
+        collisionHandler.destroyPlayerIfHit(player, projectile);
     });
 
     requestAnimationFrame(loop);

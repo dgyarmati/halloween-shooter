@@ -14,6 +14,7 @@ class Rocket {
 
         this.sprite.anchor.set(0.5, 0.5);
         this.sprite.position.set(x + 50, y);
+        this.sprite.hitArea = new PIXI.Rectangle(this.sprite.position.x, this.sprite.position.y, 20, 20);
 
         this.speed = 20;
         Rocket.list.push(this);
@@ -23,6 +24,7 @@ class Rocket {
 
     update() {
         this.sprite.position.x += this.speed;
+        this.sprite.hitArea.x = this.sprite.position.x;
 
         if (this.sprite.position.x > renderer.width * 1.1) {
             this.sprite.destroy();

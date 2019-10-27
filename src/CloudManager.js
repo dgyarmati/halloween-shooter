@@ -25,7 +25,7 @@ class CloudManager {
 
             if (element.position.x < -renderer.width * 0.3) {
                 element.destroy();
-                array.splice(0, 1);
+                array.splice(index, 1);
             }
         });
     }

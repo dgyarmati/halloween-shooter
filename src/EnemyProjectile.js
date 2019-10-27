@@ -1,4 +1,4 @@
-let _enemyProjectileList = new Array();
+let _enemyProjectileList = [];
 
 class EnemyProjectile {
     static get list() {
@@ -14,6 +14,7 @@ class EnemyProjectile {
 
         this.sprite.anchor.set(0.5, 0.5);
         this.sprite.position.set(x - 50, y);
+        this.sprite.hitArea = new PIXI.Rectangle(this.sprite.position.x, this.sprite.position.y, 10, 10);
 
         this.speed = 10;
         EnemyProjectile.list.push(this);
@@ -23,6 +24,7 @@ class EnemyProjectile {
 
     update() {
         this.sprite.position.x -= this.speed;
+        this.sprite.hitArea.x = this.sprite.position.x;
 
         if (this.sprite.position.x > renderer.width * 1.1) {
             this.sprite.destroy();

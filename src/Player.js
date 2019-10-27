@@ -5,6 +5,7 @@ class Player {
         this.sprite.anchor.set(0.5, 0.5);
         this.sprite.position.set(renderer.width * 0.2, renderer.height * 0.4);
         this.sprite.scale.set(0.4, 0.4);
+        this.sprite.hitArea = new PIXI.Rectangle(this.sprite.position.x, this.sprite.position.y, 50, 50);
 
         this.keyState = {32: false, 37: false, 38: false, 39: false, 40: false};
         this.keyCodes = {37: -1, 38: -1, 39: 1, 40: 1};
@@ -29,9 +30,11 @@ class Player {
         // Prevent from leaving the screen
         if (nextX > 0 && nextX < renderer.width) {
             this.sprite.position.x = nextX;
+            this.sprite.hitArea.x = nextX;
         }
         if (nextY > 0 && nextY < renderer.height) {
             this.sprite.position.y = nextY;
+            this.sprite.hitArea.y = nextY;
         }
 
         this.updateFire();
