@@ -43,9 +43,9 @@ function loop() {
             collisionHandler.destroyPlayerIfHit(player, enemyProjectile);
         });
 
-        EnemyManager.list.forEach((enemy) => {
-            collisionHandler.destroyPlayerAndEnemyOnCollision(player, enemy);
-        });
+        // EnemyManager.list.forEach((enemy) => {
+        //     collisionHandler.destroyPlayerAndEnemyOnCollision(player, enemy);
+        // });
 
         player.update();
         enemyManager.updateEnemies();

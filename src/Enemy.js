@@ -80,13 +80,25 @@ class Enemy {
     }
 
     updateFire() {
-        if (this.fireCooldown < this.fireSpeed) {
-            this.fireCooldown++;
-        }
+        // if (this.fireCooldown < this.fireSpeed) {
+        //     this.fireCooldown++;
+        // }
+        //
+        // if (this.keyPressed[32] && this.fireCooldown >= this.fireSpeed) {
+        //     new EnemyProjectile(this.sprite.position.x, this.sprite.position.y);
+        //     this.fireCooldown = 0;
+        // }
+    }
 
-        if (this.keyPressed[32] && this.fireCooldown >= this.fireSpeed) {
-            let projectile = new EnemyProjectile(this.sprite.position.x, this.sprite.position.y);
-            this.fireCooldown = 0;
+    onDestroy() {
+        let radius = 60;
+        let steps = 10;
+        let x = this.sprite.position.x;
+        let y = this.sprite.position.y;
+        for (let i = 0; i < steps; i++) {
+            x = (this.sprite.position.x + radius * Math.cos(2 * Math.PI * i / steps));
+            y = (this.sprite.position.y + radius * Math.sin(2 * Math.PI * i / steps));
+            new Particle(x, y);
         }
     }
 }
