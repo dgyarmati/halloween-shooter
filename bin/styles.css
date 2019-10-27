@@ -20,6 +20,7 @@ body {
     -ms-animation: fadeout 2s; /* Internet Explorer */
     -o-animation: fadeout 2s; /* Opera < 12.1 */
     animation: fadeout 2s;
+    cursor: default;
 }
 
 .menu-overlay {
@@ -45,6 +46,7 @@ body {
     left: 0;
     font-family: "Lucida Console";
     font-size: 4vh;
+    cursor: default;
 }
 
 .wrapper {

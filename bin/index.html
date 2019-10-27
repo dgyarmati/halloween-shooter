@@ -31,8 +31,13 @@
             <h1>Goodbye!</h1>
         </div>
         <script type="text/javascript">
+            let gameStarted = false;
+
             let mainScreen = document.getElementById("main-screen");
             mainScreen.style.display = "none";
+
+            let goodbyeScreen = document.getElementById("goodbye-screen");
+            goodbyeScreen.style.display = "none";
 
             setTimeout(() => {
                 let splashScreen = document.getElementById("splash-screen");
@@ -40,15 +45,17 @@
                 splashScreen.style.display = "none";
             }, 2000);
 
-            let goodbyeScreen = document.getElementById("goodbye-screen");
-            goodbyeScreen.style.display = "none";
+            let menuOptions = document.getElementsByClassName("menu-option");
+            for (let i = 0; i < menuOptions.length; i++) {
+                menuOptions[i].addEventListener("click", () => {
+                    gameStarted = true;
+                });
+            }
 
             document.getElementById("exit").addEventListener("click", () => {
                 goodbyeScreen.style.display = "block";
                 mainScreen.style.display = "none";
             });
-
-            let gameStarted = false;
 
             let type = "WebGL";
 

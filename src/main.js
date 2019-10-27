@@ -14,17 +14,14 @@ PIXI.loader.add([
 ]).load(init);
 
 
+let firstStart = true;
 function init() {
     renderer.backgroundColor = 0x22A7F0;
 
     backgroundManager = new BackgroundManager();
-    loop();
+    player = new Player();
 
-    if (gameStarted) {
-        player = new Player();
-        enemyManager = new EnemyManager();
-        collisionHandler = new CollisionHandler();
-    }
+    loop();
 }
 
 function loop() {
@@ -32,7 +29,12 @@ function loop() {
     requestAnimationFrame(loop);
     renderer.render(stage);
     if (gameStarted && player.isAlive) {
-
+        if (firstStart) {
+            mainScreen.style.display = "none";
+            enemyManager = new EnemyManager();
+            collisionHandler = new CollisionHandler();
+            firstStart = false;
+        }
         PlayerProjectile.list.forEach((playerProjectile, idx) => {
             playerProjectile.update(idx);
             EnemyManager.list.forEach((enemy) => {
