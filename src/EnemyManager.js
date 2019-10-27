@@ -7,8 +7,10 @@ class EnemyManager {
 
     constructor() {
         window.setInterval(function () {
-            const enemy = new Enemy();
-            _enemies.push(enemy);
+            if (EnemyManager.list.length <= 15) {
+                const enemy = new Enemy();
+                EnemyManager.list.push(enemy);
+            }
         }.bind(this), 2000);
     }
 

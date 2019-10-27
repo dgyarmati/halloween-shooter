@@ -12,20 +12,17 @@ class Particle {
         this.sprite.position.set(x, y);
         this.sprite.hitArea = new PIXI.Rectangle(this.sprite.position.x, this.sprite.position.y, 5, 5);
 
-        this.speed = 60;
+        this.radius = 10;
         Particle.list.push(this);
 
         stage.addChild(this.sprite);
     }
 
-    update() {
-        // this.sprite.position.x -= this.speed;
+    update(idx) {
+        this.sprite.position.x = (this.sprite.position.x + this.radius * Math.cos(2 * Math.PI * idx / 10));
+        this.sprite.position.y = (this.sprite.position.y + this.radius * Math.sin(2 * Math.PI * idx / 10));
         this.sprite.hitArea.x = this.sprite.position.x;
-
-        if (this.sprite.position.x > renderer.width * 1.1) {
-            this.sprite.destroy();
-            Particle.list.splice(Particle.list.indexOf(this), 1);
-        }
+        this.sprite.hitArea.y = this.sprite.position.y;
     }
 
 }

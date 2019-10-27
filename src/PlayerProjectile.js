@@ -22,13 +22,13 @@ class PlayerProjectile {
         stage.addChild(this.sprite);
     }
 
-    update() {
+    update(idx) {
         this.sprite.position.x += this.speed;
         this.sprite.hitArea.x = this.sprite.position.x;
 
         if (this.sprite.position.x > renderer.width * 1.1) {
             this.sprite.destroy();
-            PlayerProjectile.list.splice(PlayerProjectile.list.indexOf(this), 1);
+            PlayerProjectile.list.splice(idx, 1);
         }
     }
 }

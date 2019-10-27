@@ -12,19 +12,19 @@ class EnemyProjectile {
         this.sprite.position.set(x - 50, y);
         this.sprite.hitArea = new PIXI.Rectangle(this.sprite.position.x, this.sprite.position.y, 10, 10);
 
-        this.speed = 5;
+        this.speed = 10;
         EnemyProjectile.list.push(this);
 
         stage.addChild(this.sprite);
     }
 
-    update() {
+    update(idx) {
         this.sprite.position.x -= this.speed;
         this.sprite.hitArea.x = this.sprite.position.x;
 
         if (this.sprite.position.x > renderer.width * 1.1) {
             this.sprite.destroy();
-            EnemyProjectile.list.splice(EnemyProjectile.list.indexOf(this), 1);
+            EnemyProjectile.list.splice(idx, 1);
         }
     }
 }

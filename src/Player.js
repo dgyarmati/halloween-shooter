@@ -28,7 +28,6 @@ class Player {
         let nextX = this.sprite.position.x + this.directionX * this.speed;
         let nextY = this.sprite.position.y + this.directionY * this.speed;
 
-        // Prevent from leaving the screen
         if (nextX > 0 && nextX < renderer.width) {
             this.sprite.position.x = nextX;
             this.sprite.hitArea.x = nextX;
@@ -46,7 +45,7 @@ class Player {
             this.fireCooldown++;
 
         if (this.keyState[32] && this.fireCooldown >= this.fireSpeed) {
-            let rocket = new PlayerProjectile(this.sprite.position.x, this.sprite.position.y);
+            new PlayerProjectile(this.sprite.position.x, this.sprite.position.y);
             this.fireCooldown = 0;
         }
     }
