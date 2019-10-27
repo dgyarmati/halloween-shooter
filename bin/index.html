@@ -16,7 +16,15 @@
         <script src="../src/CollisionHandler.js"></script>
         <script src="../src/main.js"></script>
     <body>
+        <div id="splash-screen" class="overlay">
+            <h1>Spaceship Shooter Extravaganza</h1>
+        </div>
         <script type="text/javascript">
+            setTimeout(() => {
+                let splashScreen = document.getElementById("splash-screen");
+                splashScreen.style.display = "none";
+            }, 2000);
+
             let type = "WebGL";
 
             if (!PIXI.utils.isWebGLSupported()) {
