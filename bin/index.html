@@ -21,20 +21,32 @@
         </div>
         <div id="main-screen" class="menu-overlay">
             <div class="wrapper">
-                <div class="menuOption"><p>GAME 1</p></div>
-                <div class="menuOption"><p>GAME 2</p></div>
-                <div class="menuOption"><p>GAME 3</p></div>
-                <div class="menuOption"><p>EXIT</p></div>
+                <div class="menu-option"><p>GAME 1</p></div>
+                <div class="menu-option"><p>GAME 2</p></div>
+                <div class="menu-option"><p>GAME 3</p></div>
+                <div class="menu-option" id="exit"><p>EXIT</p></div>
             </div>
+        </div>
+        <div id="goodbye-screen" class="goodbye-overlay">
+            <h1>Goodbye!</h1>
         </div>
         <script type="text/javascript">
             let mainScreen = document.getElementById("main-screen");
             mainScreen.style.display = "none";
+
             setTimeout(() => {
                 let splashScreen = document.getElementById("splash-screen");
                 mainScreen.style.display = "block";
                 splashScreen.style.display = "none";
             }, 2000);
+
+            let goodbyeScreen = document.getElementById("goodbye-screen");
+            goodbyeScreen.style.display = "none";
+
+            document.getElementById("exit").addEventListener("click", () => {
+                goodbyeScreen.style.display = "block";
+                mainScreen.style.display = "none";
+            });
 
             let gameStarted = false;
 
