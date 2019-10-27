@@ -31,16 +31,16 @@ function loop() {
     if (player.isAlive) {
         backgroundManager.updateBackground();
 
-        Rocket.list.forEach((rocket) => {
-            rocket.update();
+        PlayerProjectile.list.forEach((playerProjectile) => {
+            playerProjectile.update();
             EnemyManager.list.forEach((enemy) => {
-                collisionHandler.destroyEnemyIfHit(enemy, rocket);
+                collisionHandler.destroyEnemyIfHit(enemy, playerProjectile);
             })
         });
 
-        EnemyProjectile.list.forEach((projectile) => {
-            projectile.update();
-            collisionHandler.destroyPlayerIfHit(player, projectile);
+        EnemyProjectile.list.forEach((enemyProjectile) => {
+            enemyProjectile.update();
+            collisionHandler.destroyPlayerIfHit(player, enemyProjectile);
         });
 
         EnemyManager.list.forEach((enemy) => {

@@ -46,7 +46,7 @@ class Player {
             this.fireCooldown++;
 
         if (this.keyState[32] && this.fireCooldown >= this.fireSpeed) {
-            let rocket = new Rocket(this.sprite.position.x, this.sprite.position.y);
+            let rocket = new PlayerProjectile(this.sprite.position.x, this.sprite.position.y);
             this.fireCooldown = 0;
         }
     }

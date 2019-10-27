@@ -1,6 +1,6 @@
 let _rocketList = new Array();
 
-class Rocket {
+class PlayerProjectile {
     static get list() {
         return _rocketList;
     }
@@ -17,7 +17,7 @@ class Rocket {
         this.sprite.hitArea = new PIXI.Rectangle(this.sprite.position.x, this.sprite.position.y, 20, 20);
 
         this.speed = 20;
-        Rocket.list.push(this);
+        PlayerProjectile.list.push(this);
 
         stage.addChild(this.sprite);
     }
@@ -28,7 +28,7 @@ class Rocket {
 
         if (this.sprite.position.x > renderer.width * 1.1) {
             this.sprite.destroy();
-            Rocket.list.splice(Rocket.list.indexOf(this), 1);
+            PlayerProjectile.list.splice(PlayerProjectile.list.indexOf(this), 1);
         }
     }
 }
