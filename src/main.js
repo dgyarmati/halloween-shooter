@@ -18,18 +18,20 @@ function init() {
     renderer.backgroundColor = 0x22A7F0;
 
     backgroundManager = new BackgroundManager();
-    player = new Player();
-    enemyManager = new EnemyManager();
-    collisionHandler = new CollisionHandler();
-
-    renderer.render(stage);
-
     loop();
+
+    if (gameStarted) {
+        player = new Player();
+        enemyManager = new EnemyManager();
+        collisionHandler = new CollisionHandler();
+    }
 }
 
 function loop() {
-    if (player.isAlive) {
-        backgroundManager.updateBackground();
+    backgroundManager.updateBackground();
+    requestAnimationFrame(loop);
+    renderer.render(stage);
+    if (gameStarted && player.isAlive) {
 
         PlayerProjectile.list.forEach((playerProjectile, idx) => {
             playerProjectile.update(idx);
@@ -54,8 +56,5 @@ function loop() {
 
         player.update();
         enemyManager.updateEnemies();
-
-        requestAnimationFrame(loop);
-        renderer.render(stage);
     }
 }

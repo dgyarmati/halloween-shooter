@@ -19,11 +19,22 @@
         <div id="splash-screen" class="overlay">
             <h1>Spaceship Shooter Extravaganza</h1>
         </div>
+        <div id="main-screen" class="menu-overlay">
+            <div class="game"><p>GAME 1</p></div>
+            <div class="game"><p>GAME 2</p></div>
+            <div class="game"><p>GAME 3</p></div>
+            <div class="game"><p>EXIT</p></div>
+        </div>
         <script type="text/javascript">
+            let mainScreen = document.getElementById("main-screen");
+            mainScreen.style.display = "none";
             setTimeout(() => {
                 let splashScreen = document.getElementById("splash-screen");
+                mainScreen.style.display = "block";
                 splashScreen.style.display = "none";
             }, 2000);
+
+            let gameStarted = false;
 
             let type = "WebGL";
 
