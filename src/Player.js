@@ -1,5 +1,6 @@
 class Player {
     constructor() {
+        this.isAlive = true;
         this.sprite = new PIXI.Sprite(PIXI.loader.resources["assets/spaceship.png"].texture);
 
         this.sprite.anchor.set(0.5, 0.5);

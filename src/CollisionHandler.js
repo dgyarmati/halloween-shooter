@@ -2,13 +2,13 @@ class CollisionHandler {
 
     destroyPlayerIfHit(player, enemyProjectile) {
         if (this.hitBoxesIntersect(player.sprite.hitArea, enemyProjectile.sprite.hitArea)) {
-            console.log('player hit');
+            player.isAlive = false;
         }
     }
 
     destroyEnemyIfHit(enemy, rocket) {
         if (this.hitBoxesIntersect(enemy.sprite.hitArea, rocket.sprite.hitArea)) {
-            console.log('enemy hit');
+            enemy.isAlive = false;
         }
     }
 

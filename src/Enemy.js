@@ -1,5 +1,6 @@
 class Enemy {
     constructor() {
+        this.isAlive = true;
         this.sprite = new PIXI.Sprite(PIXI.loader.resources["assets/enemy.png"].texture);
 
         this.sprite.anchor.set(0.5, 0.5);

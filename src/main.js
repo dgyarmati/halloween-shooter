@@ -28,22 +28,24 @@ function init() {
 }
 
 function loop() {
-    backgroundManager.update();
-    player.update();
-    enemyManager.update();
+    if (player.isAlive) {
+        backgroundManager.update();
+        player.update();
+        enemyManager.update();
 
-    Rocket.list.forEach((rocket) => {
-        rocket.update();
-        EnemyManager.list.forEach((enemy) => {
-            collisionHandler.destroyEnemyIfHit(enemy, rocket);
-        })
-    });
+        Rocket.list.forEach((rocket) => {
+            rocket.update();
+            EnemyManager.list.forEach((enemy) => {
+                collisionHandler.destroyEnemyIfHit(enemy, rocket);
+            })
+        });
 
-    EnemyProjectile.list.forEach((projectile) => {
-        projectile.update();
-        collisionHandler.destroyPlayerIfHit(player, projectile);
-    });
+        EnemyProjectile.list.forEach((projectile) => {
+            projectile.update();
+            collisionHandler.destroyPlayerIfHit(player, projectile);
+        });
 
-    requestAnimationFrame(loop);
-    renderer.render(stage);
+        requestAnimationFrame(loop);
+        renderer.render(stage);
+    }
 }
