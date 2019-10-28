@@ -14,7 +14,6 @@ PIXI.loader.add([
     "assets/enemyShoot.png"
 ]).load(init);
 
-
 let firstStart = true;
 function init() {
     renderer.backgroundColor = 0x22A7F0;

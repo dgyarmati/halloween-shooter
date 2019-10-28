@@ -49,6 +49,10 @@ body {
     cursor: default;
 }
 
+#exit {
+    cursor: pointer;
+}
+
 .wrapper {
     padding-top: 25vh;
 }
