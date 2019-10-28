@@ -23,6 +23,18 @@ body {
     cursor: default;
 }
 
+.wrapper {
+    padding-top: 18vh;
+}
+
+.menu-option {
+    cursor: pointer;
+}
+
+#exit {
+    cursor: pointer;
+}
+
 .menu-overlay {
     opacity: 0.7;
     background-color: #22A7F0;
@@ -47,18 +59,6 @@ body {
     font-family: "Lucida Console";
     font-size: 4vh;
     cursor: default;
-}
-
-#exit {
-    cursor: pointer;
-}
-
-.wrapper {
-    padding-top: 25vh;
-}
-
-.menu-option {
-    cursor: pointer;
 }
 
 @keyframes fadeout {
