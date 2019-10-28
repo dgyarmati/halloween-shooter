@@ -4,7 +4,7 @@ A side-scroller space shooter built in JavaScript, using PixiJS.
 
 **How to run**
 
-Just clone/download the repo, and open index.html.
+Just clone/download the repo, and open bin/index.html.
 
 **Controls**
  
