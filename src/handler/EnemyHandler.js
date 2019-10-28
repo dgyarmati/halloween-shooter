@@ -12,7 +12,7 @@ class EnemyHandler {
 
     spawnEnemies() {
         this.enemySpawnInterval = window.setInterval(function () {
-            if (_enemies.length <= 15) {
+            if (_enemies.length <= 10) {
                 const enemy = new Enemy();
                 _enemies.push(enemy);
             }

@@ -7,7 +7,7 @@ class Enemy extends Spaceship {
         this.sprite.hitArea = new PIXI.Rectangle(this.sprite.position.x, this.sprite.position.y, 30, 30);
         this.sprite.scale.set(0.4, 0.4);
 
-        this.keyCodesForRandomMovement = [37, 38, 40];
+        this.keyCodesForRandomMovement = Util.generateRandomNumberInInterval(1, 100) > 50 ? [37, 38, 40] : [37, 40];
 
         stage.addChild(this.sprite);
 
