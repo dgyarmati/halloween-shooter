@@ -22,6 +22,10 @@ class PlayerProjectile {
         stage.addChild(this.sprite);
     }
 
+    destroy() {
+        this.sprite.destroy();
+    }
+
     update(idx) {
         this.sprite.position.x += this.speed;
         this.sprite.hitArea.x = this.sprite.position.x;
@@ -30,5 +34,12 @@ class PlayerProjectile {
             this.sprite.destroy();
             PlayerProjectile.list.splice(idx, 1);
         }
+    }
+
+    static destroyAll() {
+        PlayerProjectile.list.forEach((projectile, index) => {
+            projectile.destroy();
+            PlayerProjectile.list.splice(index, 1);
+        });
     }
 }

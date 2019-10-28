@@ -3,6 +3,7 @@ let backgroundManager;
 let player;
 let enemyManager;
 let collisionHandler;
+let gameCleanupInterval;
 
 PIXI.loader.add([
     "assets/cloud_1.png",
@@ -36,6 +37,7 @@ function loop() {
             collisionHandler = new CollisionHandler();
             firstStart = false;
         }
+
         PlayerProjectile.list.forEach((playerProjectile, idx) => {
             playerProjectile.update(idx);
             EnemyManager.list.forEach((enemy) => {
@@ -59,5 +61,16 @@ function loop() {
 
         player.update();
         enemyManager.updateEnemies();
+
+        if (!player.isAlive) {
+            gameCleanupInterval = setInterval(() => {
+                player.destroy();
+                EnemyManager.destroyAll();
+                Particle.destroyAll();
+                PlayerProjectile.destroyAll();
+                EnemyProjectile.destroyAll();
+            }, 10);
+            setTimeout(() => window.clearInterval(gameCleanupInterval), 1000);
+        }
     }
 }

@@ -18,11 +18,22 @@ class Particle {
         stage.addChild(this.sprite);
     }
 
+    destroy() {
+        this.sprite.destroy();
+    }
+
     update(idx) {
         this.sprite.position.x = (this.sprite.position.x + this.radius * Math.cos(2 * Math.PI * idx / 10));
         this.sprite.position.y = (this.sprite.position.y + this.radius * Math.sin(2 * Math.PI * idx / 10));
         this.sprite.hitArea.x = this.sprite.position.x;
         this.sprite.hitArea.y = this.sprite.position.y;
+    }
+
+    static destroyAll() {
+        Particle.list.forEach((particle, index) => {
+            particle.destroy();
+            Particle.list.splice(index, 1);
+        });
     }
 
 }

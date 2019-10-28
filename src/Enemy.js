@@ -25,6 +25,10 @@ class Enemy {
         setInterval(this.moveRandomly.bind(this), interval);
     }
 
+    destroy() {
+        this.sprite.destroy();
+    }
+
     moveRandomly() {
         const keyCode = this.keyCodes[Math.floor(Math.random() * this.keyCodes.length)];
         this.pressKey(keyCode);

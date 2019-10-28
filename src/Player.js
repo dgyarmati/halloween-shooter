@@ -26,6 +26,10 @@ class Player {
         stage.addChild(this.sprite);
     }
 
+    destroy() {
+        this.sprite.destroy();
+    }
+
     update() {
         let nextX = this.sprite.position.x + this.directionX * this.speed;
         let nextY = this.sprite.position.y + this.directionY * this.speed;
