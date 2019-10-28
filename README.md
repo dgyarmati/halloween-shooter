@@ -10,4 +10,4 @@ Just clone/download the repo, and open index.html.
  
 SPACE to shoot, arrow keys to move.
 
-I used most of the sprites and some of the logic of [this project](https://github.com/Karzam/Spaceship_Tutorial_Part_1).
+I used most of the sprites and some of the logic from [this project](https://github.com/Karzam/Spaceship_Tutorial_Part_1).
