@@ -8,9 +8,9 @@ class Enemy {
         this.sprite.hitArea = new PIXI.Rectangle(this.sprite.position.x, this.sprite.position.y, 30, 30);
         this.sprite.scale.set(0.4, 0.4);
 
-        this.keyPressed = {37: false, 38: false, 39: false, 40: false};
+        this.keysPressed = {37: false, 38: false, 39: false, 40: false};
         this.keyCodesWithDirections = {37: -1, 38: -1, 40: 1};
-        this.keyCodes = [37, 38, 40];
+        this.keyCodesForRandomMovement = [37, 38, 40];
 
         this.directionX = 0;
         this.directionY = 0;
@@ -30,10 +30,10 @@ class Enemy {
     }
 
     moveRandomly() {
-        const keyCode = this.keyCodes[Math.floor(Math.random() * this.keyCodes.length)];
-        this.pressKey(keyCode);
+        const keyCode = this.keyCodesForRandomMovement[Math.floor(Math.random() * this.keyCodesForRandomMovement.length)];
+        this.onKeyDown(keyCode);
         const delay = this.generateRandomNumberInInterval(100, 500);
-        setTimeout(() => this.releaseKey(keyCode), delay);
+        setTimeout(() => this.onKeyUp(keyCode), delay);
     }
 
     generateRandomNumberInInterval(min, max) {
@@ -58,8 +58,8 @@ class Enemy {
         this.updateFire();
     }
 
-    pressKey(keyCode) {
-        this.keyPressed[keyCode] = true;
+    onKeyDown(keyCode) {
+        this.keysPressed[keyCode] = true;
 
         if (keyCode == 37 || keyCode == 39)
             this.directionX = this.keyCodesWithDirections[keyCode];
@@ -67,18 +67,18 @@ class Enemy {
             this.directionY = this.keyCodesWithDirections[keyCode];
     }
 
-    releaseKey(keyCode) {
-        this.keyPressed[keyCode] = false;
+    onKeyUp(keyCode) {
+        this.keysPressed[keyCode] = false;
 
-        if (!this.keyPressed[37] && this.keyPressed[39])
+        if (!this.keysPressed[37] && this.keysPressed[39])
             this.directionX = this.keyCodesWithDirections[39];
-        else if (this.keyPressed[37] && !this.keyPressed[39])
+        else if (this.keysPressed[37] && !this.keysPressed[39])
             this.directionX = this.keyCodesWithDirections[37];
         else this.directionX = 0;
 
-        if (!this.keyPressed[38] && this.keyPressed[40])
+        if (!this.keysPressed[38] && this.keysPressed[40])
             this.directionY = this.keyCodesWithDirections[40];
-        else if (this.keyPressed[38] && !this.keyPressed[40])
+        else if (this.keysPressed[38] && !this.keysPressed[40])
             this.directionY = this.keyCodesWithDirections[38];
         else this.directionY = 0;
     }

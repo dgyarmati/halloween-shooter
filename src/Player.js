@@ -5,11 +5,11 @@ class Player {
 
         this.sprite.anchor.set(0.5, 0.5);
         this.sprite.position.set(renderer.width * 0.2, renderer.height * 0.4);
-        this.sprite.scale.set(0.4, 0.4);
         this.sprite.hitArea = new PIXI.Rectangle(this.sprite.position.x, this.sprite.position.y, 50, 50);
+        this.sprite.scale.set(0.4, 0.4);
 
-        this.keyState = {32: false, 37: false, 38: false, 39: false, 40: false};
-        this.keyCodes = {37: -1, 38: -1, 39: 1, 40: 1};
+        this.keysPressed = {32: false, 37: false, 38: false, 39: false, 40: false};
+        this.keyCodesWithDirections = {37: -1, 38: -1, 39: 1, 40: 1};
 
         this.directionX = 0;
         this.directionY = 0;
@@ -50,34 +50,34 @@ class Player {
         if (this.fireCooldown < this.fireSpeed)
             this.fireCooldown++;
 
-        if (this.keyState[32] && this.fireCooldown >= this.fireSpeed) {
+        if (this.keysPressed[32] && this.fireCooldown >= this.fireSpeed) {
             new PlayerProjectile(this.sprite.position.x, this.sprite.position.y);
             this.fireCooldown = 0;
         }
     }
 
     onKeyDown(key) {
-        this.keyState[key.keyCode] = true;
+        this.keysPressed[key.keyCode] = true;
 
         if (key.keyCode == 37 || key.keyCode == 39)
-            this.directionX = this.keyCodes[key.keyCode];
+            this.directionX = this.keyCodesWithDirections[key.keyCode];
         else if (key.keyCode == 38 || key.keyCode == 40)
-            this.directionY = this.keyCodes[key.keyCode];
+            this.directionY = this.keyCodesWithDirections[key.keyCode];
     }
 
     onKeyUp(key) {
-        this.keyState[key.keyCode] = false;
+        this.keysPressed[key.keyCode] = false;
 
-        if (!this.keyState[37] && this.keyState[39])
-            this.directionX = this.keyCodes[39];
-        else if (this.keyState[37] && !this.keyState[39])
-            this.directionX = this.keyCodes[37];
+        if (!this.keysPressed[37] && this.keysPressed[39])
+            this.directionX = this.keyCodesWithDirections[39];
+        else if (this.keysPressed[37] && !this.keysPressed[39])
+            this.directionX = this.keyCodesWithDirections[37];
         else this.directionX = 0;
 
-        if (!this.keyState[38] && this.keyState[40])
-            this.directionY = this.keyCodes[40];
-        else if (this.keyState[38] && !this.keyState[40])
-            this.directionY = this.keyCodes[38];
+        if (!this.keysPressed[38] && this.keysPressed[40])
+            this.directionY = this.keyCodesWithDirections[40];
+        else if (this.keysPressed[38] && !this.keysPressed[40])
+            this.directionY = this.keyCodesWithDirections[38];
         else this.directionY = 0;
     }
 

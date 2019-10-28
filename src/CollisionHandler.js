@@ -1,5 +1,10 @@
 class CollisionHandler {
 
+    constructor(projectileHandler) {
+        this.projectileHandler = projectileHandler;
+    }
+
+
     destroyPlayerIfHit(player, enemyProjectile) {
         if (this.hitBoxesIntersect(player.sprite.hitArea, enemyProjectile.sprite.hitArea)) {
             player.isAlive = false;
@@ -16,7 +21,19 @@ class CollisionHandler {
     destroyEnemyIfHit(enemy, playerProjectile) {
         if (this.hitBoxesIntersect(enemy.sprite.hitArea, playerProjectile.sprite.hitArea)) {
             enemy.isAlive = false;
-            enemy.onDestroy();
+            this.explode(enemy);
+        }
+    }
+
+    explode(enemy) {
+        let radius = 10;
+        let steps = 10;
+        let x = enemy.sprite.position.x;
+        let y = enemy.sprite.position.y;
+        for (let i = 0; i < steps; i++) {
+            x = (enemy.sprite.position.x + radius * Math.cos(2 * Math.PI * i / 10));
+            y = (enemy.sprite.position.y + radius * Math.sin(2 * Math.PI * i / 10));
+            this.projectileHandler.createExplosionParticle(x, y);
         }
     }
 

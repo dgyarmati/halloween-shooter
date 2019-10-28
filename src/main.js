@@ -1,7 +1,8 @@
 const stage = new PIXI.Container();
-let backgroundManager;
+let backgroundHandler;
 let player;
-let enemyManager;
+let projectileHandler;
+let enemyHandler;
 let collisionHandler;
 let gameCleanupInterval;
 
@@ -15,17 +16,27 @@ PIXI.loader.add([
 ]).load(init);
 
 let firstStart = true;
+
+function setupGameObjects() {
+    backgroundHandler = new BackgroundHandler();
+    collisionHandler = new CollisionHandler(null);
+    enemyHandler = new EnemyHandler(collisionHandler, null);
+    projectileHandler = new ProjectileHandler(collisionHandler, enemyHandler);
+    collisionHandler.projectileHandler = projectileHandler;
+    enemyHandler.projectileHandler = projectileHandler;
+    player = new Player1(projectileHandler);
+}
+
 function init() {
     renderer.backgroundColor = 0x22A7F0;
 
-    backgroundManager = new BackgroundManager();
-    player = new Player();
+    setupGameObjects();
 
     loop();
 }
 
 function redrawScreen() {
-    backgroundManager.updateBackground();
+    backgroundHandler.updateBackground();
     requestAnimationFrame(loop);
     renderer.render(stage);
 }
@@ -36,47 +47,26 @@ function loop() {
         if (firstStart) {
             mainScreen.style.display = "none";
             player.makeVisible();
-            enemyManager = new EnemyManager();
-            collisionHandler = new CollisionHandler();
+            enemyHandler.spawnEnemies();
             firstStart = false;
         }
 
-        PlayerProjectile.list.forEach((playerProjectile, idx) => {
-            playerProjectile.update(idx);
-            EnemyManager.list.forEach((enemy) => {
-                collisionHandler.destroyEnemyIfHit(enemy, playerProjectile);
-            })
-        });
-
-        EnemyProjectile.list.forEach((enemyProjectile, idx) => {
-            enemyProjectile.update(idx);
-            collisionHandler.destroyPlayerIfHit(player, enemyProjectile);
-        });
-
-        Particle.list.forEach((particleFromExplosion, idx) => {
-            particleFromExplosion.update(idx);
-            collisionHandler.destroyPlayerIfHit(player, particleFromExplosion);
-        });
-
-        EnemyManager.list.forEach((enemy) => {
-            collisionHandler.destroyPlayerAndEnemyOnCollision(player, enemy);
-        });
+        projectileHandler.handleProjectiles();
+        enemyHandler.handleCollisionsWithPlayer();
 
         player.update();
-        enemyManager.updateEnemies();
+        enemyHandler.updateEnemies();
 
         if (!player.isAlive) {
             gameCleanupInterval = setInterval(() => {
                 player.destroy();
-                EnemyManager.destroyAll();
-                Particle.destroyAll();
-                PlayerProjectile.destroyAll();
-                EnemyProjectile.destroyAll();
+                enemyHandler.clearAll();
+                projectileHandler.clearAll();
             }, 10);
             setTimeout(() => {
                 window.clearInterval(gameCleanupInterval);
                 mainScreen.style.display = "block";
-                player = new Player();
+                player = new Player1(projectileHandler);
                 firstStart = true;
                 gameStarted = false;
             }, 1000);
