@@ -31,6 +31,7 @@ function loop() {
     if (gameStarted && player.isAlive) {
         if (firstStart) {
             mainScreen.style.display = "none";
+            player.makeVisible();
             enemyManager = new EnemyManager();
             collisionHandler = new CollisionHandler();
             firstStart = false;

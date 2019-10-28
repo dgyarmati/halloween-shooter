@@ -18,10 +18,12 @@ class Player {
         this.fireSpeed = 10;
         this.fireCooldown = 0;
 
-        stage.addChild(this.sprite);
-
         window.addEventListener('keydown', this.onKeyDown.bind(this));
         window.addEventListener('keyup', this.onKeyUp.bind(this));
+    }
+
+    makeVisible() {
+        stage.addChild(this.sprite);
     }
 
     update() {
