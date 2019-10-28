@@ -24,7 +24,7 @@ function setupGameObjects() {
     projectileHandler = new ProjectileHandler(collisionHandler, enemyHandler);
     collisionHandler.projectileHandler = projectileHandler;
     enemyHandler.projectileHandler = projectileHandler;
-    player = new Player1(projectileHandler);
+    player = new Player(projectileHandler);
 }
 
 function init() {
@@ -66,7 +66,7 @@ function loop() {
             setTimeout(() => {
                 window.clearInterval(gameCleanupInterval);
                 mainScreen.style.display = "block";
-                player = new Player1(projectileHandler);
+                player = new Player(projectileHandler);
                 firstStart = true;
                 gameStarted = false;
             }, 1000);

@@ -24,17 +24,17 @@ class Spaceship {
         this.sprite.destroy();
     }
 
-    onKeyDown(key) {
-        this.keysPressed[key.keyCode] = true;
+    onKeyDown(keyCode) {
+        this.keysPressed[keyCode] = true;
 
-        if (key.keyCode == 37 || key.keyCode == 39)
-            this.directionX = this.keyCodesWithDirections[key.keyCode];
-        else if (key.keyCode == 38 || key.keyCode == 40)
-            this.directionY = this.keyCodesWithDirections[key.keyCode];
+        if (keyCode === 37 || keyCode === 39)
+            this.directionX = this.keyCodesWithDirections[keyCode];
+        else if (keyCode === 38 || keyCode === 40)
+            this.directionY = this.keyCodesWithDirections[keyCode];
     }
 
-    onKeyUp(key) {
-        this.keysPressed[key.keyCode] = false;
+    onKeyUp(keyCode) {
+        this.keysPressed[keyCode] = false;
 
         if (!this.keysPressed[37] && this.keysPressed[39])
             this.directionX = this.keyCodesWithDirections[39];

@@ -9,11 +9,11 @@ class ProjectileHandler {
     }
 
     createPlayerProjectile(x, y) {
-        this.playerProjectiles.push(new PlayerProjectile2(x, y));
+        this.playerProjectiles.push(new PlayerProjectile(x, y));
     }
 
     createEnemyProjectile(x, y) {
-        this.enemyProjectiles.push(new EnemyProjectile2(x, y));
+        this.enemyProjectiles.push(new EnemyProjectile(x, y));
     }
 
     createExplosionParticle(x, y) {
