@@ -70,7 +70,14 @@ function loop() {
                 PlayerProjectile.destroyAll();
                 EnemyProjectile.destroyAll();
             }, 10);
-            setTimeout(() => window.clearInterval(gameCleanupInterval), 1000);
+            setTimeout(() => {
+                window.clearInterval(gameCleanupInterval);
+                mainScreen.style.display = "block";
+                player = new Player();
+                firstStart = true;
+                gameStarted = false;
+                loop();
+            }, 1000);
         }
     }
 }
