@@ -19,12 +19,10 @@ let firstStart = true;
 
 function setupGameObjects() {
     backgroundHandler = new BackgroundHandler();
-    collisionHandler = new CollisionHandler(null);
-    enemyHandler = new EnemyHandler(collisionHandler, null);
-    projectileHandler = new ProjectileHandler(collisionHandler, enemyHandler);
-    collisionHandler.projectileHandler = projectileHandler;
-    enemyHandler.projectileHandler = projectileHandler;
-    player = new Player(projectileHandler);
+    collisionHandler = new CollisionHandler();
+    enemyHandler = new EnemyHandler();
+    projectileHandler = new ProjectileHandler();
+    player = new Player();
 }
 
 function init() {

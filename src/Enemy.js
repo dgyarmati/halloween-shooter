@@ -1,7 +1,7 @@
 class Enemy extends Spaceship {
 
-    constructor(projectileHandler) {
-        super(10, 30, "assets/enemy.png", projectileHandler);
+    constructor() {
+        super(10, 30, "assets/enemy.png");
 
         this.sprite.position.set(renderer.width * 0.8, renderer.height * Math.random());
         this.sprite.hitArea = new PIXI.Rectangle(this.sprite.position.x, this.sprite.position.y, 30, 30);
@@ -50,7 +50,7 @@ class Enemy extends Spaceship {
         }
 
         if (this.fireCooldown >= this.fireSpeed) {
-            this.projectileHandler.createEnemyProjectile(this.sprite.position.x, this.sprite.position.y);
+            ProjectileHandler.createEnemyProjectile(this.sprite.position.x, this.sprite.position.y);
             this.fireCooldown = 0;
         }
     }

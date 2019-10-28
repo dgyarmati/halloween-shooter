@@ -1,31 +1,26 @@
 class CollisionHandler {
 
-    constructor(projectileHandler) {
-        this.projectileHandler = projectileHandler;
-    }
-
-
-    destroyPlayerIfHit(player, enemyProjectile) {
-        if (this.hitBoxesIntersect(player.sprite.hitArea, enemyProjectile.sprite.hitArea)) {
+    static destroyPlayerIfHit(player, enemyProjectile) {
+        if (CollisionHandler.hitBoxesIntersect(player.sprite.hitArea, enemyProjectile.sprite.hitArea)) {
             player.isAlive = false;
         }
     }
 
-    destroyPlayerAndEnemyOnCollision(player, enemy) {
-        if (this.hitBoxesIntersect(player.sprite.hitArea, enemy.sprite.hitArea)) {
+    static destroyPlayerAndEnemyOnCollision(player, enemy) {
+        if (CollisionHandler.hitBoxesIntersect(player.sprite.hitArea, enemy.sprite.hitArea)) {
             player.isAlive = false;
             enemy.isAlive = false;
         }
     }
 
-    destroyEnemyIfHit(enemy, playerProjectile) {
-        if (this.hitBoxesIntersect(enemy.sprite.hitArea, playerProjectile.sprite.hitArea)) {
+    static destroyEnemyIfHit(enemy, playerProjectile) {
+        if (CollisionHandler.hitBoxesIntersect(enemy.sprite.hitArea, playerProjectile.sprite.hitArea)) {
             enemy.isAlive = false;
-            this.explode(enemy);
+            CollisionHandler.explode(enemy);
         }
     }
 
-    explode(enemy) {
+    static explode(enemy) {
         let radius = 10;
         let steps = 10;
         let x = enemy.sprite.position.x;
@@ -33,11 +28,11 @@ class CollisionHandler {
         for (let i = 0; i < steps; i++) {
             x = (enemy.sprite.position.x + radius * Math.cos(2 * Math.PI * i / 10));
             y = (enemy.sprite.position.y + radius * Math.sin(2 * Math.PI * i / 10));
-            this.projectileHandler.createExplosionParticle(x, y);
+            ProjectileHandler.createExplosionParticle(x, y);
         }
     }
 
-    hitBoxesIntersect(rect1, rect2) {
+    static hitBoxesIntersect(rect1, rect2) {
         return rect1.x < rect2.x + rect2.width &&
             rect1.x + rect1.width > rect2.x &&
             rect1.y < rect2.y + rect2.height &&

@@ -1,4 +1,5 @@
 class BackgroundHandler {
+
     constructor() {
         this.backgroundElements = [];
 
@@ -19,11 +20,11 @@ class BackgroundHandler {
     }
 
     updateBackground() {
-        this.backgroundElements.forEach(function (element, index, array) {
-            element.position.x -= 4;
+        this.backgroundElements.forEach(function (backgroundElement, index, array) {
+            backgroundElement.position.x -= 4;
 
-            if (element.position.x < -renderer.width * 0.3) {
-                element.destroy();
+            if (backgroundElement.position.x < -renderer.width * 0.3) {
+                backgroundElement.destroy();
                 array.splice(index, 1);
             }
         });

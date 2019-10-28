@@ -1,9 +1,7 @@
 class Spaceship {
 
-    constructor(speed, fireSpeed, spritePath, projectileHandler) {
+    constructor(speed, fireSpeed, spritePath) {
         this.isAlive = true;
-
-        this.projectileHandler = projectileHandler;
 
         this.sprite = new PIXI.Sprite(PIXI.loader.resources[spritePath].texture);
         this.sprite.anchor.set(0.5, 0.5);
