@@ -1,8 +1,8 @@
-let _enemyProjectileList = [];
+let _enemyProjectiles = [];
 
 class EnemyProjectile {
     static get list() {
-        return _enemyProjectileList;
+        return _enemyProjectiles;
     }
 
     constructor(x, y) {

@@ -75,8 +75,12 @@ function loop() {
                 player = new Player();
                 firstStart = true;
                 gameStarted = false;
-                loop();
             }, 1000);
+            while (!gameStarted) {
+                backgroundManager.updateBackground();
+                requestAnimationFrame(loop);
+                renderer.render(stage);
+            }
         }
     }
 }

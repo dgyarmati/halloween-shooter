@@ -1,12 +1,12 @@
-let _rocketList = new Array();
+let _playerProjectiles = new Array();
 
 class PlayerProjectile {
     static get list() {
-        return _rocketList;
+        return _playerProjectiles;
     }
 
     static set list(value) {
-        _rocketList = value;
+        _playerProjectiles = value;
     }
 
     constructor(x, y) {

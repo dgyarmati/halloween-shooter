@@ -1,25 +1,25 @@
 class BackgroundManager {
     constructor() {
-        this.cloudsList = [];
+        this.backgroundElements = [];
 
         window.setInterval(function () {
             const sprite = (Math.random() > 0.5 ? "cloud_1" : "cloud_2");
-            this.cloud = new PIXI.Sprite(PIXI.loader.resources["assets/" + sprite + ".png"].texture);
-            this.cloud.anchor.set(0.5, 0.5);
-            this.cloud.position.set(renderer.width * 1.3, renderer.height * Math.random());
+            this.backgroundElement = new PIXI.Sprite(PIXI.loader.resources["assets/" + sprite + ".png"].texture);
+            this.backgroundElement.anchor.set(0.5, 0.5);
+            this.backgroundElement.position.set(renderer.width * 1.3, renderer.height * Math.random());
 
             let minScale = 0.2;
             let maxScale = 1.2;
             let scale = Math.random() * (maxScale - minScale) + minScale;
-            this.cloud.scale.set(scale, scale);
+            this.backgroundElement.scale.set(scale, scale);
 
-            stage.addChildAt(this.cloud, 0);
-            this.cloudsList.push(this.cloud);
+            stage.addChildAt(this.backgroundElement, 0);
+            this.backgroundElements.push(this.backgroundElement);
         }.bind(this), 2000);
     }
 
     updateBackground() {
-        this.cloudsList.forEach(function (element, index, array) {
+        this.backgroundElements.forEach(function (element, index, array) {
             element.position.x -= 4;
 
             if (element.position.x < -renderer.width * 0.3) {
