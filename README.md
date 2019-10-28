@@ -4,7 +4,7 @@ A side-scroller space shooter built in JavaScript, using PixiJS.
 
 **How to run locally**
 
-Just clone/download the repo, and open bin/index.html.
+Just clone/download the repo, and open `bin/index.html`.
 
 If it complains about the CORS of the images, you'll probably either need to run it from an IDE, or spin 
 up a simple web server. The easiest way to do this is probably using Python. A detailed instruction can be found 
