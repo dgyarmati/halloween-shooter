@@ -13,9 +13,15 @@ PIXI.loader.add([
     "assets/rocket.png",
     "assets/enemy.png",
     "assets/enemyShoot.png"
-]).load(init);
+]).load(initGame);
 
 let firstStart = true;
+
+function initGame() {
+    renderer.backgroundColor = 0x22A7F0;
+    setupGameObjects();
+    gameLoop();
+}
 
 function setupGameObjects() {
     backgroundHandler = new BackgroundHandler();
@@ -25,21 +31,7 @@ function setupGameObjects() {
     player = new Player();
 }
 
-function init() {
-    renderer.backgroundColor = 0x22A7F0;
-
-    setupGameObjects();
-
-    loop();
-}
-
-function redrawScreen() {
-    backgroundHandler.updateBackground();
-    requestAnimationFrame(loop);
-    renderer.render(stage);
-}
-
-function loop() {
+function gameLoop() {
     redrawScreen();
     if (gameStarted && player.isAlive) {
         if (firstStart) {
@@ -57,20 +49,38 @@ function loop() {
 
         if (!player.isAlive) {
             gameCleanupInterval = setInterval(() => {
-                player.destroy();
-                enemyHandler.clearAll();
-                projectileHandler.clearAll();
+                removeGameObjects();
             }, 10);
             setTimeout(() => {
-                window.clearInterval(gameCleanupInterval);
-                mainScreen.style.display = "block";
-                player = new Player(projectileHandler);
-                firstStart = true;
-                gameStarted = false;
+                endGame();
             }, 1000);
             while (!gameStarted) {
                 redrawScreen();
             }
         }
     }
+}
+
+function redrawScreen() {
+    backgroundHandler.updateBackground();
+    requestAnimationFrame(gameLoop);
+    renderer.render(stage);
+}
+
+function removeGameObjects() {
+    player.destroy();
+    enemyHandler.clearAll();
+    projectileHandler.clearAll();
+}
+
+function endGame() {
+    window.clearInterval(gameCleanupInterval);
+    displayGameMenu();
+    player = new Player(projectileHandler);
+    firstStart = true;
+    gameStarted = false;
+}
+
+function displayGameMenu() {
+    mainScreen.style.display = "block";
 }
