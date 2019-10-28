@@ -1,9 +1,9 @@
 class Enemy extends Spaceship {
 
     constructor() {
-        super(10, 30, "assets/enemy.png");
+        super(Util.generateRandomNumberInInterval(7, 16), Util.generateRandomNumberInInterval(10, 40), "assets/enemy.png");
 
-        this.sprite.position.set(renderer.width * 0.8, renderer.height * Math.random());
+        this.sprite.position.set(renderer.width - 1, renderer.height * Math.random());
         this.sprite.hitArea = new PIXI.Rectangle(this.sprite.position.x, this.sprite.position.y, 30, 30);
         this.sprite.scale.set(0.4, 0.4);
 
@@ -11,21 +11,15 @@ class Enemy extends Spaceship {
 
         stage.addChild(this.sprite);
 
-        const interval = this.generateRandomNumberInInterval(100, 700);
+        const interval = Util.generateRandomNumberInInterval(100, 700);
         setInterval(() => this.setRandomDirection(), interval);
     }
 
     setRandomDirection() {
         const keyCode = this.keyCodesForRandomMovement[Math.floor(Math.random() * this.keyCodesForRandomMovement.length)];
         this.onKeyDown(keyCode);
-        const delay = this.generateRandomNumberInInterval(100, 500);
+        const delay = Util.generateRandomNumberInInterval(100, 500);
         setTimeout(() => this.onKeyUp(keyCode), delay);
-    }
-
-    generateRandomNumberInInterval(min, max) {
-        min = Math.ceil(min);
-        max = Math.floor(max);
-        return Math.floor(Math.random() * (max - min + 1)) + min;
     }
 
     update() {
