@@ -24,10 +24,14 @@ function init() {
     loop();
 }
 
-function loop() {
+function redrawScreen() {
     backgroundManager.updateBackground();
     requestAnimationFrame(loop);
     renderer.render(stage);
+}
+
+function loop() {
+    redrawScreen();
     if (gameStarted && player.isAlive) {
         if (firstStart) {
             mainScreen.style.display = "none";
@@ -77,9 +81,7 @@ function loop() {
                 gameStarted = false;
             }, 1000);
             while (!gameStarted) {
-                backgroundManager.updateBackground();
-                requestAnimationFrame(loop);
-                renderer.render(stage);
+                redrawScreen();
             }
         }
     }
