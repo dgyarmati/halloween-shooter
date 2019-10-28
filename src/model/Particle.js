@@ -6,7 +6,7 @@ class Particle {
     }
 
     constructor(x, y) {
-        this.sprite = new PIXI.Sprite(PIXI.loader.resources["assets/enemyShoot.png"].texture);
+        this.sprite = new PIXI.Sprite(PIXI.loader.resources["assets/enemy_projectile.png"].texture);
 
         this.sprite.anchor.set(0.5, 0.5);
         this.sprite.position.set(x, y);

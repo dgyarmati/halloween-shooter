@@ -12,10 +12,10 @@ PIXI.loader.add([
     "assets/spaceship.png",
     "assets/rocket.png",
     "assets/enemy.png",
-    "assets/enemyShoot.png"
+    "assets/enemy_projectile.png"
 ]).load(initGame);
 
-let firstStart = true;
+let firstStartOrRestart = true;
 
 function initGame() {
     renderer.backgroundColor = 0x22A7F0;
@@ -34,11 +34,11 @@ function setupGameObjects() {
 function gameLoop() {
     redrawScreen();
     if (gameStarted && player.isAlive) {
-        if (firstStart) {
+        if (firstStartOrRestart) {
             mainScreen.style.display = "none";
             player.makeVisible();
             enemyHandler.spawnEnemies();
-            firstStart = false;
+            firstStartOrRestart = false;
         }
 
         projectileHandler.handleProjectiles();
@@ -77,7 +77,7 @@ function endGame() {
     window.clearInterval(gameCleanupInterval);
     displayGameMenu();
     player = new Player(projectileHandler);
-    firstStart = true;
+    firstStartOrRestart = true;
     gameStarted = false;
 }
 
