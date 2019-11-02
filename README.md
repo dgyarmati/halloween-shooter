@@ -1,4 +1,4 @@
-# Space Shooter Extravaganza #
+# This Is Halloween #
 
 A Halloween- themed side-scroller space shooter built in JavaScript, using PixiJS. Pretty much the same as
 [shooter-game](https://github.com/dgyarmati/shooter-game), but with different sprites and soe sounds.
