@@ -8,6 +8,15 @@ const GHOST_2_SPRITE = "assets/ghost_2.png";
 const PLAYER_PROJECTILE_SPRITE = "assets/player_projectile.png";
 const ENEMY_PROJECTILE_SPRITE = "assets/enemy_projectile.png";
 
+const GHOST_KILL_THRESHOLD = 15;
+const PUMPKIN_KILL_THRESHOLD = 15;
+let GHOSTS_KILLED = 0;
+let PUMPKINS_KILLED = 0;
+
+let FIRST_WAVE = true;
+let SECOND_WAVE = false;
+let BOSS = false;
+
 const stage = new PIXI.Container();
 let backgroundHandler;
 let player;
@@ -50,8 +59,25 @@ function gameLoop() {
         if (firstStartOrRestart) {
             mainScreen.style.display = "none";
             player.makeVisible();
-            enemyHandler.spawnEnemies();
             firstStartOrRestart = false;
+        }
+
+        if (GHOSTS_KILLED === GHOST_KILL_THRESHOLD) {
+            enemyHandler.clearGhosts();
+            FIRST_WAVE = false;
+            SECOND_WAVE = true;
+        }
+
+        if (PUMPKINS_KILLED === PUMPKIN_KILL_THRESHOLD) {
+            enemyHandler.clearPumpkins();
+            SECOND_WAVE = false;
+            BOSS = true;
+        }
+
+        if (FIRST_WAVE) {
+            enemyHandler.spawnGhosts();
+        } else if (SECOND_WAVE) {
+            enemyHandler.spawnPumpkins();
         }
 
         projectileHandler.handleProjectiles();

@@ -13,9 +13,17 @@ class CollisionHandler {
         }
     }
 
-    static destroyEnemyIfHit(enemy, playerProjectile) {
+    static destroyGhostIfHit(enemy, playerProjectile) {
         if (CollisionHandler.hitBoxesIntersect(enemy.sprite.hitArea, playerProjectile.sprite.hitArea)) {
             enemy.isAlive = false;
+            GHOSTS_KILLED++;
+        }
+    }
+
+    static destroyPumpkinIfHit(enemy, playerProjectile) {
+        if (CollisionHandler.hitBoxesIntersect(enemy.sprite.hitArea, playerProjectile.sprite.hitArea)) {
+            enemy.isAlive = false;
+            PUMPKINS_KILLED++;
             CollisionHandler.explode(enemy);
         }
     }

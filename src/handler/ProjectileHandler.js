@@ -31,8 +31,15 @@ class ProjectileHandler {
     handleProjectiles() {
         _playerProjectiles.forEach((playerProjectile, idx) => {
             ProjectileHandler.updatePlayerProjectile(idx, playerProjectile, _playerProjectiles);
-            EnemyHandler.enemies.forEach((enemy) => {
-                CollisionHandler.destroyEnemyIfHit(enemy, playerProjectile);
+            EnemyHandler.ghosts.forEach((enemy) => {
+                CollisionHandler.destroyGhostIfHit(enemy, playerProjectile);
+            })
+        });
+
+        _playerProjectiles.forEach((playerProjectile, idx) => {
+            ProjectileHandler.updatePlayerProjectile(idx, playerProjectile, _playerProjectiles);
+            EnemyHandler.pumpkins.forEach((enemy) => {
+                CollisionHandler.destroyPumpkinIfHit(enemy, playerProjectile);
             })
         });
 
