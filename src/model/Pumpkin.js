@@ -1,4 +1,4 @@
-class Pumpkin extends Player {
+class Pumpkin extends Character {
 
     constructor() {
         super(Util.generateRandomNumberInInterval(7, 16), Util.generateRandomNumberInInterval(10, 40), PUMPKIN_SPRITE);

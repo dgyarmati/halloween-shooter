@@ -1,4 +1,4 @@
-class Witch extends Player {
+class Witch extends Character {
 
     constructor() {
         super(10, 10, PLAYER_SPRITE);

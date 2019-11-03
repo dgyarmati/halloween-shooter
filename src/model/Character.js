@@ -1,4 +1,4 @@
-class Player {
+class Character {
 
     constructor(speed, fireSpeed, spritePath) {
         this.isAlive = true;
