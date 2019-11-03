@@ -1,7 +1,7 @@
 class Player extends Spaceship {
 
     constructor() {
-        super(10, 10, "assets/spaceship.png");
+        super(10, 10, PLAYER_SPRITE);
 
         this.sprite.position.set(renderer.width * 0.1, renderer.height * 0.5);
         this.sprite.hitArea = new PIXI.Rectangle(this.sprite.position.x, this.sprite.position.y, 50, 50);

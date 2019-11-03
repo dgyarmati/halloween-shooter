@@ -1,3 +1,9 @@
+const BACKGROUND_IMAGE = "assets/cloud_1.png";
+const PLAYER_SPRITE = "assets/spaceship.png";
+const ENEMY_SPRITE = "assets/enemy.png";
+const PLAYER_PROJECTILE_SPRITE = "assets/rocket.png";
+const ENEMY_PROJECTILE_SPRITE = "assets/enemy_projectile.png";
+
 const stage = new PIXI.Container();
 let backgroundHandler;
 let player;
@@ -7,12 +13,12 @@ let collisionHandler;
 let gameCleanupInterval;
 
 PIXI.loader.add([
-    "assets/cloud_1.png",
+    BACKGROUND_IMAGE,
     "assets/cloud_2.png",
-    "assets/spaceship.png",
-    "assets/rocket.png",
-    "assets/enemy.png",
-    "assets/enemy_projectile.png"
+    PLAYER_SPRITE,
+    PLAYER_PROJECTILE_SPRITE,
+    ENEMY_SPRITE,
+    ENEMY_PROJECTILE_SPRITE
 ]).load(initGame);
 
 let firstStartOrRestart = true;

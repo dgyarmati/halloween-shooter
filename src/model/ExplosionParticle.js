@@ -1,7 +1,7 @@
 class ExplosionParticle extends Projectile {
 
     constructor(x, y) {
-        super(x, y, "assets/enemy_projectile.png", 10, 0, 5, 5);
+        super(x, y, ENEMY_PROJECTILE_SPRITE, 10, 0, 5, 5);
     }
 
 }
