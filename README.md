@@ -1,6 +1,6 @@
 # This Is Halloween #
 
-A Halloween - themed side-scroller shooter game built in JavaScript, using PixiJS. Pretty much the same as
+A Halloween-themed side-scroller shooter game built in JavaScript, using PixiJS. Pretty much the same as
 [shooter-game](https://github.com/dgyarmati/shooter-game), but with different sprites and some sounds, plus a boss fight!
 
 **How to run locally**
