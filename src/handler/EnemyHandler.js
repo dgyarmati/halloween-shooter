@@ -81,6 +81,11 @@ class EnemyHandler {
                 enemy.update();
                 if (!enemy.isAlive) {
                     let explosion = new Audio("assets/audio/explosion.wav");
+                    const x = enemy.sprite.position.x;
+                    const y = enemy.sprite.position.y;
+                    enemy.sprite.destroy();
+                    array.splice(index, 1);
+                    EnemyHandler.deathAnimation(x, y, PUMPKIN_EXPLOSION);
                     explosion.play();
                 }
                 else if (!enemy.isAlive || enemy.sprite.position.x < -renderer.width * 0.3) {
@@ -118,8 +123,6 @@ class EnemyHandler {
             ghost.destroy();
             _ghosts.splice(index, 1);
         });
-
-        _ghosts = [];
     }
 
     clearPumpkins() {
@@ -130,8 +133,6 @@ class EnemyHandler {
             pumpkin.destroy();
             _pumpkins.splice(index, 1);
         });
-
-        _pumpkins = [];
     }
 
     clearAll() {

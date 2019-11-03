@@ -1,7 +1,7 @@
 class Pumpkin extends Character {
 
     constructor() {
-        super(Util.generateRandomNumberInInterval(7, 16), Util.generateRandomNumberInInterval(10, 40), PUMPKIN_SPRITE);
+        super(Util.generateRandomNumberInInterval(6, 10), Util.generateRandomNumberInInterval(5, 10), Math.random() > 0.5 ? PUMPKIN_SPRITE : PUMPKIN_2_SPRITE);
 
         this.sprite.position.set(renderer.width - 1, renderer.height * Math.random());
         this.sprite.hitArea = new PIXI.Rectangle(this.sprite.position.x, this.sprite.position.y, 30, 30);
@@ -36,19 +36,17 @@ class Pumpkin extends Character {
             this.sprite.hitArea.x = nextX;
             this.sprite.hitArea.y = nextY;
 
-            this.updateFire();
+            if (this.fireCooldown > 60) {
+                this.updateFire();
+                this.fireCooldown = 0;
+            }
+
+            this.fireCooldown++;
         }
     }
 
     updateFire() {
-        if (this.fireCooldown < this.fireSpeed) {
-            this.fireCooldown++;
-        }
-
-        if (this.fireCooldown >= this.fireSpeed) {
-            ProjectileHandler.createEnemyProjectile(this.sprite.position.x, this.sprite.position.y);
-            this.fireCooldown = 0;
-        }
+        ProjectileHandler.createEnemyProjectile(this.sprite.position.x, this.sprite.position.y);
     }
 
 }

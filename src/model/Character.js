@@ -9,7 +9,7 @@ class Character {
 
         this.speed = speed;
         this.fireSpeed = fireSpeed;
-        this.fireCooldown = 0;
+        this.fireCooldown = 61;
 
         this.directionX = 0;
         this.directionY = 0;
