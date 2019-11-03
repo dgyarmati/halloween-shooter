@@ -1,7 +1,7 @@
 const BACKGROUND_IMAGE = "assets/cloud_1.png";
-const PLAYER_SPRITE = "assets/spaceship.png";
-const ENEMY_SPRITE = "assets/enemy.png";
-const PLAYER_PROJECTILE_SPRITE = "assets/rocket.png";
+const PLAYER_SPRITE = "assets/player.png";
+const ENEMY_SPRITE = "assets/enemy_1.png";
+const PLAYER_PROJECTILE_SPRITE = "assets/player_projectile.png";
 const ENEMY_PROJECTILE_SPRITE = "assets/enemy_projectile.png";
 
 const stage = new PIXI.Container();
