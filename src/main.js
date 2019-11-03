@@ -1,4 +1,4 @@
-const BACKGROUND_IMAGE = "assets/cloud_1.png";
+const BACKGROUND_IMAGE = "assets/stars.png";
 const PLAYER_SPRITE = "assets/player.png";
 const ENEMY_SPRITE = "assets/enemy_1.png";
 const PLAYER_PROJECTILE_SPRITE = "assets/player_projectile.png";
@@ -24,7 +24,7 @@ PIXI.loader.add([
 let firstStartOrRestart = true;
 
 function initGame() {
-    renderer.backgroundColor = 0x22A7F0;
+    renderer.backgroundColor = 0x050E1D;
     setupGameObjects();
     gameLoop();
 }
