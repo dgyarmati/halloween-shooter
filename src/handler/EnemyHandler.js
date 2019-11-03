@@ -104,7 +104,7 @@ class EnemyHandler {
                     const x = boss.sprite.position.x;
                     const y = boss.sprite.position.y;
                     boss.sprite.destroy();
-                    EnemyHandler.deathAnimation(x, y, PUMPKIN_EXPLOSION);
+                    EnemyHandler.deathAnimation(x, y, BIG_EXPLOSION);
                     laugh.play();
                 }
             }

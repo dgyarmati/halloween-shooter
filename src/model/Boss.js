@@ -5,7 +5,7 @@ class Boss extends Character {
         super(20, 40, BOSS_SPRITE);
 
         this.sprite.position.set(renderer.width * 0.85, renderer.height * 0.5);
-        this.sprite.hitArea = new PIXI.Rectangle(this.sprite.position.x, this.sprite.position.y, 100, 100);
+        this.sprite.hitArea = new PIXI.Rectangle(this.sprite.position.x, this.sprite.position.y, 150, 150);
         this.sprite.scale.set(0.4, 0.4);
 
         this.keyCodesForRandomMovement = [38, 40];

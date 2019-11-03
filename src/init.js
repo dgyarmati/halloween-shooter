@@ -22,6 +22,12 @@ function hideGoodbyeScreen() {
     return goodbyeScreen;
 }
 
+function hideVictoryScreen() {
+    let victoryScreen = document.getElementById("victory-screen");
+    victoryScreen.style.display = "none";
+    return victoryScreen;
+}
+
 function fadeSplashScreenToMainMenu() {
     setTimeout(() => {
         let splashScreen = document.getElementById("splash-screen");
@@ -65,6 +71,7 @@ function setupPixiJS() {
 //startMainTheme();
 let mainScreen = hideMainScreen();
 let goodbyeScreen = hideGoodbyeScreen();
+let victoryScreen = hideVictoryScreen();
 fadeSplashScreenToMainMenu();
 addClickHandlersToMenu();
 displayGoodbyScreenOnClick();

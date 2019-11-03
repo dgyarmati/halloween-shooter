@@ -24,6 +24,20 @@ body {
     cursor: default;
 }
 
+#victory-screen {
+    opacity: 1;
+    background-color: #050E1D;
+    position: fixed;
+    width: 100%;
+    height: 100%;
+    line-height: 90vh;
+    top: 0;
+    left: 0;
+    font-family: "Showcard Gothic";
+    font-size: 4vh;
+    cursor: default;
+}
+
 hr {
     width: 5%;
 }

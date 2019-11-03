@@ -9,11 +9,12 @@ const GHOST_2_SPRITE = "assets/ghost_2.png";
 const BOSS_SPRITE = "assets/boss.png";
 const GHOST_EXPLOSION = "assets/ghost_explosion.png";
 const PUMPKIN_EXPLOSION = "assets/pumpkin_explosion.png";
+const BIG_EXPLOSION = "assets/big_explosion.png";
 const PLAYER_PROJECTILE_SPRITE = "assets/player_projectile.png";
 const ENEMY_PROJECTILE_SPRITE = "assets/enemy_projectile.png";
 
-const GHOST_KILL_THRESHOLD = 0;
-const PUMPKIN_KILL_THRESHOLD = 0;
+const GHOST_KILL_THRESHOLD = 15;
+const PUMPKIN_KILL_THRESHOLD = 10;
 let GHOSTS_KILLED = 0;
 let PUMPKINS_KILLED = 0;
 
@@ -42,6 +43,7 @@ PIXI.loader.add([
     GHOST_2_SPRITE,
     GHOST_EXPLOSION,
     PUMPKIN_EXPLOSION,
+    BIG_EXPLOSION,
     ENEMY_PROJECTILE_SPRITE
 ]).load(initGame);
 
@@ -78,18 +80,27 @@ function gameLoop() {
         player.update();
         enemyHandler.updateEnemies();
 
-        if (!player.isAlive) {
-            let scream = new Audio("assets/audio/scream.wav");
-            scream.play();
-            const x = player.sprite.position.x;
-            const y = player.sprite.position.y;
-            player.destroy();
-            EnemyHandler.deathAnimation(x, y, GHOST_EXPLOSION);
+        if (!player.isAlive || BOSS_HEALTH === 0) {
+            if (!player.isAlive) {
+                let scream = new Audio("assets/audio/scream.wav");
+                scream.play();
+                const x = player.sprite.position.x;
+                const y = player.sprite.position.y;
+                player.destroy();
+                EnemyHandler.deathAnimation(x, y, GHOST_EXPLOSION);
+            }
+            player.isAlive = false;
             gameCleanupInterval = setInterval(() => {
                 removeGameObjects();
             }, 10);
             setTimeout(() => {
-                endGame();
+                if (BOSS_HEALTH > 0) {
+                    endGame();
+                } else {
+                    stage = new PIXI.Container();
+                    window.clearInterval(gameCleanupInterval);
+                    displayVictoryScreen();
+                }
             }, 1000);
             while (!gameStarted) {
                 redrawScreen();
@@ -115,15 +126,20 @@ function endGame() {
     displayGameMenu();
     player = new Witch(projectileHandler);
     firstStartOrRestart = true;
+    gameStarted = false;
     GHOSTS_KILLED = 0;
     PUMPKINS_KILLED = 0;
-    gameStarted = false;
     FIRST_WAVE = true;
     SECOND_WAVE = false;
     BOSS_STAGE = false;
     stage = new PIXI.Container();
+    setupGameObjects();
 }
 
 function displayGameMenu() {
     mainScreen.style.display = "block";
+}
+
+function displayVictoryScreen() {
+    victoryScreen.style.display = "block";
 }
