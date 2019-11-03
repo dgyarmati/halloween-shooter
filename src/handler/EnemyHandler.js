@@ -22,6 +22,10 @@ class EnemyHandler {
     updateEnemies() {
         _enemies.forEach((enemy, index, array) => {
             enemy.update();
+            if (!enemy.isAlive) {
+                let explosion = new Audio("assets/audio/explosion.wav");
+                explosion.play();
+            }
             if (!enemy.isAlive || enemy.sprite.position.x < -renderer.width * 0.3) {
                 enemy.sprite.destroy();
                 array.splice(index, 1);

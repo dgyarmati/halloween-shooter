@@ -1,5 +1,5 @@
 class Projectile {
-    constructor(x, y, spritePath, speed, xCoordinateOffset, hitboxWidth, hitboxHeight) {
+    constructor(x, y, spritePath, speed, xCoordinateOffset, hitboxWidth, hitboxHeight, soundPath) {
         this.sprite = new PIXI.Sprite(PIXI.loader.resources[spritePath].texture);
 
         this.sprite.anchor.set(0.5, 0.5);
@@ -9,6 +9,9 @@ class Projectile {
         this.speed = speed;
 
         stage.addChild(this.sprite);
+
+        let sound = new Audio(soundPath);
+        sound.play();
     }
 
 }

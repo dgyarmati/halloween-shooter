@@ -57,6 +57,8 @@ function gameLoop() {
         enemyHandler.updateEnemies();
 
         if (!player.isAlive) {
+            let scream = new Audio("assets/audio/scream.wav");
+            scream.play();
             gameCleanupInterval = setInterval(() => {
                 removeGameObjects();
             }, 10);

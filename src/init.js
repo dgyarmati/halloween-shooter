@@ -1,6 +1,13 @@
 let gameStarted = false;
 let renderer;
 
+function startMainTheme() {
+    let mainTheme = new Audio("assets/audio/main_theme.mp3");
+    setInterval(() => {
+        mainTheme.play();
+    }, 0)
+}
+
 function hideMainScreen() {
     let mainScreen = document.getElementById("main-screen");
     mainScreen.style.display = "none";
@@ -50,6 +57,7 @@ function setupPixiJS() {
     document.body.appendChild(renderer.view);
 }
 
+startMainTheme();
 let mainScreen = hideMainScreen();
 let goodbyeScreen = hideGoodbyeScreen();
 fadeSplashScreenToMainMenu();
