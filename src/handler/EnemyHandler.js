@@ -37,7 +37,7 @@ class EnemyHandler {
     }
 
     spawnGhosts() {
-        if (!this.ghostSpawnInterval) {
+        if (!this.ghostSpawnInterval && gameStarted) {
             this.ghostSpawnInterval = window.setInterval(function () {
                 if (_ghosts.length <= 10) {
                     const ghost = new Ghost();
@@ -48,7 +48,7 @@ class EnemyHandler {
     }
 
     spawnPumpkins() {
-        if (!this.pumpkinSpawnInterval) {
+        if (!this.pumpkinSpawnInterval && gameStarted) {
             this.pumpkinSpawnInterval = window.setInterval(function () {
                 if (_pumpkins.length <= 10) {
                     const pumpkin = new Pumpkin();
@@ -111,21 +111,27 @@ class EnemyHandler {
     }
 
     clearGhosts() {
+        window.clearInterval(this.ghostSpawnInterval);
         this.ghostSpawnInterval = null;
 
         _ghosts.forEach((ghost, index) => {
             ghost.destroy();
             _ghosts.splice(index, 1);
         });
+
+        _ghosts = [];
     }
 
     clearPumpkins() {
+        window.clearInterval(this.pumpkinSpawnInterval);
         this.pumpkinSpawnInterval = null;
 
         _pumpkins.forEach((pumpkin, index) => {
             pumpkin.destroy();
             _pumpkins.splice(index, 1);
         });
+
+        _pumpkins = [];
     }
 
     clearAll() {

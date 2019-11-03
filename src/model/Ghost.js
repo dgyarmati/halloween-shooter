@@ -1,7 +1,7 @@
 class Ghost extends Character {
 
     constructor() {
-        super(Util.generateRandomNumberInInterval(4, 9), 0, Math.random() > 0.5 ? GHOST_SPRITE : GHOST_2_SPRITE);
+        super(Util.generateRandomNumberInInterval(7, 10), 0, Math.random() > 0.5 ? GHOST_SPRITE : GHOST_2_SPRITE);
 
         this.sprite.position.set(renderer.width - 1, renderer.height * Math.random());
         this.sprite.hitArea = new PIXI.Rectangle(this.sprite.position.x, this.sprite.position.y, 30, 30);
