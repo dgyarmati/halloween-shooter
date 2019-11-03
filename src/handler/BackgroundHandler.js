@@ -4,9 +4,8 @@ class BackgroundHandler {
         this.backgroundElements = [];
 
         window.setInterval(function () {
-            for (let i = 0; i < 200; i++) {
-                const sprite = (Math.random() > 0.5 ? "stars" : "stars_2");
-                this.backgroundElement = new PIXI.Sprite(PIXI.loader.resources["assets/" + sprite + ".png"].texture);
+            for (let i = 0; i < 10; i++) {
+                this.backgroundElement = (Math.random() > 0.5 ? new PIXI.Sprite(PIXI.loader.resources[STARS_1_SPRITE].texture) : new PIXI.Sprite(PIXI.loader.resources[STARS_2_SPRITE].texture));
                 this.backgroundElement.anchor.set(0.5, 0.5);
                 this.backgroundElement.position.set(renderer.width * 1.3, renderer.height * Math.random());
 
@@ -18,7 +17,7 @@ class BackgroundHandler {
                 stage.addChildAt(this.backgroundElement, 0);
                 this.backgroundElements.push(this.backgroundElement);
             }
-        }.bind(this), 100);
+        }.bind(this), 50);
     }
 
     updateBackground() {

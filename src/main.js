@@ -1,4 +1,6 @@
-const BACKGROUND_IMAGE = "assets/stars.png";
+const MOON_SPRITE = "assets/moon.png";
+const STARS_1_SPRITE = "assets/stars.png";
+const STARS_2_SPRITE = "assets/stars2.png";
 const PLAYER_SPRITE = "assets/player.png";
 const ENEMY_SPRITE = "assets/enemy_1.png";
 const PLAYER_PROJECTILE_SPRITE = "assets/player_projectile.png";
@@ -13,8 +15,9 @@ let collisionHandler;
 let gameCleanupInterval;
 
 PIXI.loader.add([
-    BACKGROUND_IMAGE,
-    "assets/cloud_2.png",
+    MOON_SPRITE,
+    STARS_1_SPRITE,
+    STARS_2_SPRITE,
     PLAYER_SPRITE,
     PLAYER_PROJECTILE_SPRITE,
     ENEMY_SPRITE,
