@@ -1,9 +1,11 @@
 let gameStarted = false;
 let renderer;
+let mainTheme;
+let mainThemeInterval;
 
 function startMainTheme() {
-    let mainTheme = new Audio("assets/audio/main_theme.mp3");
-    setInterval(() => {
+    mainTheme = new Audio("assets/audio/main_theme.mp3");
+    mainThemeInterval = setInterval(() => {
         mainTheme.play();
     }, 0)
 }
@@ -41,6 +43,9 @@ function displayGoodbyScreenOnClick() {
     document.getElementById("exit").addEventListener("click", () => {
         goodbyeScreen.style.display = "block";
         mainScreen.style.display = "none";
+        mainTheme.pause();
+        mainTheme.currentTime = 0;
+        window.clearInterval(mainThemeInterval);
     });
 }
 

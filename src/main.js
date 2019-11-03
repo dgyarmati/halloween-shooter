@@ -2,7 +2,9 @@ const MOON = "assets/moon_crescent.png";
 const STARS_1_SPRITE = "assets/stars.png";
 const STARS_2_SPRITE = "assets/stars_2.png";
 const PLAYER_SPRITE = "assets/player.png";
-const ENEMY_SPRITE = "assets/enemy_1.png";
+const PUMPKIN_SPRITE = "assets/enemy_1.png";
+const GHOST_SPRITE = "assets/ghost_1.png";
+const GHOST_2_SPRITE = "assets/ghost_2.png";
 const PLAYER_PROJECTILE_SPRITE = "assets/player_projectile.png";
 const ENEMY_PROJECTILE_SPRITE = "assets/enemy_projectile.png";
 
@@ -20,7 +22,7 @@ PIXI.loader.add([
     STARS_2_SPRITE,
     PLAYER_SPRITE,
     PLAYER_PROJECTILE_SPRITE,
-    ENEMY_SPRITE,
+    PUMPKIN_SPRITE,
     ENEMY_PROJECTILE_SPRITE
 ]).load(initGame);
 
@@ -37,7 +39,7 @@ function setupGameObjects() {
     collisionHandler = new CollisionHandler();
     enemyHandler = new EnemyHandler();
     projectileHandler = new ProjectileHandler();
-    player = new Player();
+    player = new Witch();
 }
 
 function gameLoop() {
@@ -87,7 +89,7 @@ function removeGameObjects() {
 function endGame() {
     window.clearInterval(gameCleanupInterval);
     displayGameMenu();
-    player = new Player(projectileHandler);
+    player = new Witch(projectileHandler);
     firstStartOrRestart = true;
     gameStarted = false;
 }

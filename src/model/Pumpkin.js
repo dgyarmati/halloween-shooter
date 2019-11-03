@@ -1,7 +1,7 @@
-class Enemy extends Spaceship {
+class Pumpkin extends Player {
 
     constructor() {
-        super(Util.generateRandomNumberInInterval(7, 16), Util.generateRandomNumberInInterval(10, 40), ENEMY_SPRITE);
+        super(Util.generateRandomNumberInInterval(7, 16), Util.generateRandomNumberInInterval(10, 40), PUMPKIN_SPRITE);
 
         this.sprite.position.set(renderer.width - 1, renderer.height * Math.random());
         this.sprite.hitArea = new PIXI.Rectangle(this.sprite.position.x, this.sprite.position.y, 30, 30);

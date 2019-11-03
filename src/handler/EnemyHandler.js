@@ -13,7 +13,7 @@ class EnemyHandler {
     spawnEnemies() {
         this.enemySpawnInterval = window.setInterval(function () {
             if (_enemies.length <= 10) {
-                const enemy = new Enemy();
+                const enemy = new Pumpkin();
                 _enemies.push(enemy);
             }
         }.bind(this), 2000);

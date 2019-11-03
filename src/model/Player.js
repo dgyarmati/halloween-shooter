@@ -1,52 +1,49 @@
-class Player extends Spaceship {
+class Player {
 
-    constructor() {
-        super(10, 10, PLAYER_SPRITE);
+    constructor(speed, fireSpeed, spritePath) {
+        this.isAlive = true;
 
-        this.sprite.position.set(renderer.width * 0.1, renderer.height * 0.5);
-        this.sprite.hitArea = new PIXI.Rectangle(this.sprite.position.x, this.sprite.position.y, 50, 50);
+        this.sprite = new PIXI.Sprite(PIXI.loader.resources[spritePath].texture);
+        this.sprite.anchor.set(0.5, 0.5);
         this.sprite.scale.set(0.4, 0.4);
 
-        window.addEventListener('keydown', this.pressKey.bind(this));
-        window.addEventListener('keyup', this.releaseKey.bind(this));
+        this.speed = speed;
+        this.fireSpeed = fireSpeed;
+        this.fireCooldown = 0;
+
+        this.directionX = 0;
+        this.directionY = 0;
+
+        this.keyCodesWithDirections = {37: -1, 38: -1, 39: 1, 40: 1};
+        this.keysPressed = {37: false, 38: false, 39: false, 40: false};
     }
 
-    makeVisible() {
-        stage.addChild(this.sprite);
+    destroy() {
+        this.sprite.destroy();
     }
 
-    update() {
-        let nextX = this.sprite.position.x + this.directionX * this.speed;
-        let nextY = this.sprite.position.y + this.directionY * this.speed;
+    onKeyDown(keyCode) {
+        this.keysPressed[keyCode] = true;
 
-        if (nextX > 0 && nextX < renderer.width) {
-            this.sprite.position.x = nextX;
-            this.sprite.hitArea.x = nextX;
-        }
-        if (nextY > 0 && nextY < renderer.height) {
-            this.sprite.position.y = nextY;
-            this.sprite.hitArea.y = nextY;
-        }
-
-        this.updateFire();
+        if (keyCode === 37 || keyCode === 39)
+            this.directionX = this.keyCodesWithDirections[keyCode];
+        else if (keyCode === 38 || keyCode === 40)
+            this.directionY = this.keyCodesWithDirections[keyCode];
     }
 
-    updateFire() {
-        if (this.fireCooldown < this.fireSpeed)
-            this.fireCooldown++;
+    onKeyUp(keyCode) {
+        this.keysPressed[keyCode] = false;
 
-        if (this.keysPressed[32] && this.fireCooldown >= this.fireSpeed) {
-            ProjectileHandler.createPlayerProjectile(this.sprite.position.x, this.sprite.position.y);
-            this.fireCooldown = 0;
-        }
+        if (!this.keysPressed[37] && this.keysPressed[39])
+            this.directionX = this.keyCodesWithDirections[39];
+        else if (this.keysPressed[37] && !this.keysPressed[39])
+            this.directionX = this.keyCodesWithDirections[37];
+        else this.directionX = 0;
+
+        if (!this.keysPressed[38] && this.keysPressed[40])
+            this.directionY = this.keyCodesWithDirections[40];
+        else if (this.keysPressed[38] && !this.keysPressed[40])
+            this.directionY = this.keyCodesWithDirections[38];
+        else this.directionY = 0;
     }
-
-    pressKey(key) {
-        this.onKeyDown(key.keyCode);
-    }
-
-    releaseKey(key) {
-        this.onKeyUp(key.keyCode);
-    }
-
 }
