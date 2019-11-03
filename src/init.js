@@ -62,7 +62,7 @@ function setupPixiJS() {
     document.body.appendChild(renderer.view);
 }
 
-startMainTheme();
+//startMainTheme();
 let mainScreen = hideMainScreen();
 let goodbyeScreen = hideGoodbyeScreen();
 fadeSplashScreenToMainMenu();

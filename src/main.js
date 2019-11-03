@@ -5,6 +5,7 @@ const PLAYER_SPRITE = "assets/player.png";
 const PUMPKIN_SPRITE = "assets/enemy_1.png";
 const GHOST_SPRITE = "assets/ghost_1.png";
 const GHOST_2_SPRITE = "assets/ghost_2.png";
+const GHOST_EXPLOSION = "assets/ghost_explosion.png";
 const PLAYER_PROJECTILE_SPRITE = "assets/player_projectile.png";
 const ENEMY_PROJECTILE_SPRITE = "assets/enemy_projectile.png";
 
@@ -34,6 +35,7 @@ PIXI.loader.add([
     PUMPKIN_SPRITE,
     GHOST_SPRITE,
     GHOST_2_SPRITE,
+    GHOST_EXPLOSION,
     ENEMY_PROJECTILE_SPRITE
 ]).load(initGame);
 
@@ -62,23 +64,7 @@ function gameLoop() {
             firstStartOrRestart = false;
         }
 
-        if (GHOSTS_KILLED === GHOST_KILL_THRESHOLD) {
-            enemyHandler.clearGhosts();
-            FIRST_WAVE = false;
-            SECOND_WAVE = true;
-        }
-
-        if (PUMPKINS_KILLED === PUMPKIN_KILL_THRESHOLD) {
-            enemyHandler.clearPumpkins();
-            SECOND_WAVE = false;
-            BOSS = true;
-        }
-
-        if (FIRST_WAVE) {
-            enemyHandler.spawnGhosts();
-        } else if (SECOND_WAVE) {
-            enemyHandler.spawnPumpkins();
-        }
+        enemyHandler.spawnEnemies();
 
         projectileHandler.handleProjectiles();
         enemyHandler.handleCollisionsWithPlayer();
@@ -89,6 +75,10 @@ function gameLoop() {
         if (!player.isAlive) {
             let scream = new Audio("assets/audio/scream.wav");
             scream.play();
+            const x = player.sprite.position.x;
+            const y = player.sprite.position.y;
+            player.destroy();
+            EnemyHandler.deathAnimation(x, y, GHOST_EXPLOSION);
             gameCleanupInterval = setInterval(() => {
                 removeGameObjects();
             }, 10);
@@ -119,7 +109,12 @@ function endGame() {
     displayGameMenu();
     player = new Witch(projectileHandler);
     firstStartOrRestart = true;
+    GHOSTS_KILLED = 0;
+    PUMPKINS_KILLED = 0;
     gameStarted = false;
+    FIRST_WAVE = true;
+    SECOND_WAVE = false;
+    BOSS = false;
 }
 
 function displayGameMenu() {

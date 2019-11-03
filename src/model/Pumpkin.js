@@ -23,19 +23,21 @@ class Pumpkin extends Character {
     }
 
     update() {
-        let nextX = this.sprite.position.x + this.directionX * this.speed;
-        let nextY = this.sprite.position.y + this.directionY * this.speed;
+        if (this.isAlive) {
+            let nextX = this.sprite.position.x + this.directionX * this.speed;
+            let nextY = this.sprite.position.y + this.directionY * this.speed;
 
-        this.sprite.position.x = nextX;
+            this.sprite.position.x = nextX;
 
-        if (nextY > 0 && nextY < renderer.height) {
-            this.sprite.position.y = nextY;
+            if (nextY > 0 && nextY < renderer.height) {
+                this.sprite.position.y = nextY;
+            }
+
+            this.sprite.hitArea.x = nextX;
+            this.sprite.hitArea.y = nextY;
+
+            this.updateFire();
         }
-
-        this.sprite.hitArea.x = nextX;
-        this.sprite.hitArea.y = nextY;
-
-        this.updateFire();
     }
 
     updateFire() {
