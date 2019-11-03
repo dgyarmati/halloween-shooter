@@ -20,8 +20,8 @@ class ProjectileHandler {
         _playerProjectiles.push(new PlayerProjectile(x, y));
     }
 
-    static createEnemyProjectile(x, y) {
-        _enemyProjectiles.push(new EnemyProjectile(x, y));
+    static createEnemyProjectile(x, y, projectileSprite) {
+        _enemyProjectiles.push(new EnemyProjectile(x, y, projectileSprite));
     }
 
     static createExplosionParticle(x, y) {
@@ -42,6 +42,13 @@ class ProjectileHandler {
                 CollisionHandler.destroyPumpkinIfHit(enemy, playerProjectile);
             })
         });
+
+        if (boss) {
+            _playerProjectiles.forEach((playerProjectile, idx) => {
+                ProjectileHandler.updatePlayerProjectile(idx, playerProjectile, _playerProjectiles);
+                CollisionHandler.damageBossIfHit(boss, playerProjectile);
+            });
+        }
 
         _enemyProjectiles.forEach((enemyProjectile, idx) => {
             ProjectileHandler.updateEnemyProjectile(idx, enemyProjectile, _enemyProjectiles);

@@ -1,5 +1,6 @@
 let _pumpkins = [];
 let _ghosts = [];
+let boss = null;
 
 class EnemyHandler {
 
@@ -26,13 +27,15 @@ class EnemyHandler {
         if (PUMPKINS_KILLED === PUMPKIN_KILL_THRESHOLD) {
             enemyHandler.clearPumpkins();
             SECOND_WAVE = false;
-            BOSS = true;
+            BOSS_STAGE = true;
         }
 
         if (FIRST_WAVE) {
             enemyHandler.spawnGhosts();
         } else if (SECOND_WAVE) {
             enemyHandler.spawnPumpkins();
+        } else if (BOSS_STAGE && !boss) {
+            boss = new Boss();
         }
     }
 
@@ -93,6 +96,18 @@ class EnemyHandler {
                     array.splice(index, 1);
                 }
             });
+
+            if (boss) {
+                boss.update();
+                if (BOSS_HEALTH <= 0) {
+                    let laugh = new Audio("assets/audio/laugh.wav");
+                    const x = boss.sprite.position.x;
+                    const y = boss.sprite.position.y;
+                    boss.sprite.destroy();
+                    EnemyHandler.deathAnimation(x, y, PUMPKIN_EXPLOSION);
+                    laugh.play();
+                }
+            }
         }
     }
 
@@ -113,6 +128,10 @@ class EnemyHandler {
         _pumpkins.forEach((enemy) => {
             CollisionHandler.destroyPlayerAndEnemyOnCollision(player, enemy);
         });
+
+        if (boss) {
+            CollisionHandler.destroyPlayerIfHit(player, boss);
+        }
     }
 
     clearGhosts() {
@@ -135,9 +154,16 @@ class EnemyHandler {
         });
     }
 
+    clearBoss() {
+        if (boss) {
+            boss = null;
+        }
+    }
+
     clearAll() {
         this.clearGhosts();
         this.clearPumpkins();
+        this.clearBoss();
     }
 
 }

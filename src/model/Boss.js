@@ -1,15 +1,21 @@
-class Pumpkin extends Character {
+let BOSS_HEALTH = 40;
 
+class Boss extends Character {
     constructor() {
-        super(Util.generateRandomNumberInInterval(6, 10), Util.generateRandomNumberInInterval(5, 10), Math.random() > 0.5 ? PUMPKIN_SPRITE : PUMPKIN_2_SPRITE);
+        super(20, 40, BOSS_SPRITE);
 
-        this.sprite.position.set(renderer.width - 1, renderer.height * Math.random());
-        this.sprite.hitArea = new PIXI.Rectangle(this.sprite.position.x, this.sprite.position.y, 30, 30);
+        this.sprite.position.set(renderer.width * 0.85, renderer.height * 0.5);
+        this.sprite.hitArea = new PIXI.Rectangle(this.sprite.position.x, this.sprite.position.y, 100, 100);
         this.sprite.scale.set(0.4, 0.4);
 
-        this.keyCodesForRandomMovement = Util.generateRandomNumberInInterval(1, 100) > 50 ? [37, 38, 40] : [37, 40];
+        this.keyCodesForRandomMovement = [38, 40];
+
+        let laugh = new Audio("assets/audio/laugh.wav");
+        laugh.play();
 
         stage.addChild(this.sprite);
+
+        setInterval(() => CollisionHandler.explode(boss), Util.generateRandomNumberInInterval(2000, 4000));
 
         const interval = Util.generateRandomNumberInInterval(100, 700);
         setInterval(() => this.setRandomDirection(), interval);
@@ -18,7 +24,7 @@ class Pumpkin extends Character {
     setRandomDirection() {
         const keyCode = this.keyCodesForRandomMovement[Math.floor(Math.random() * this.keyCodesForRandomMovement.length)];
         this.onKeyDown(keyCode);
-        const delay = Util.generateRandomNumberInInterval(100, 500);
+        const delay = Util.generateRandomNumberInInterval(300, 500);
         setTimeout(() => this.onKeyUp(keyCode), delay);
     }
 
@@ -36,7 +42,7 @@ class Pumpkin extends Character {
             this.sprite.hitArea.x = nextX;
             this.sprite.hitArea.y = nextY;
 
-            if (this.fireCooldown > 60) {
+            if (this.fireCooldown > 30) {
                 this.updateFire();
                 this.fireCooldown = 0;
             }
@@ -46,7 +52,6 @@ class Pumpkin extends Character {
     }
 
     updateFire() {
-        ProjectileHandler.createEnemyProjectile(this.sprite.position.x, this.sprite.position.y, ENEMY_PROJECTILE_SPRITE);
+        ProjectileHandler.createEnemyProjectile(this.sprite.position.x, this.sprite.position.y, Math.random() > 0.5 ? PUMPKIN_SPRITE : PUMPKIN_2_SPRITE);
     }
-
 }

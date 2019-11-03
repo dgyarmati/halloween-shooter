@@ -6,19 +6,20 @@ const PUMPKIN_SPRITE = "assets/enemy_1.png";
 const PUMPKIN_2_SPRITE = "assets/enemy_2.png";
 const GHOST_SPRITE = "assets/ghost_1.png";
 const GHOST_2_SPRITE = "assets/ghost_2.png";
+const BOSS_SPRITE = "assets/boss.png";
 const GHOST_EXPLOSION = "assets/ghost_explosion.png";
 const PUMPKIN_EXPLOSION = "assets/pumpkin_explosion.png";
 const PLAYER_PROJECTILE_SPRITE = "assets/player_projectile.png";
 const ENEMY_PROJECTILE_SPRITE = "assets/enemy_projectile.png";
 
-const GHOST_KILL_THRESHOLD = 15;
-const PUMPKIN_KILL_THRESHOLD = 10;
+const GHOST_KILL_THRESHOLD = 0;
+const PUMPKIN_KILL_THRESHOLD = 0;
 let GHOSTS_KILLED = 0;
 let PUMPKINS_KILLED = 0;
 
 let FIRST_WAVE = true;
 let SECOND_WAVE = false;
-let BOSS = false;
+let BOSS_STAGE = false;
 
 let stage = new PIXI.Container();
 let backgroundHandler;
@@ -37,6 +38,7 @@ PIXI.loader.add([
     PUMPKIN_SPRITE,
     PUMPKIN_2_SPRITE,
     GHOST_SPRITE,
+    BOSS_SPRITE,
     GHOST_2_SPRITE,
     GHOST_EXPLOSION,
     PUMPKIN_EXPLOSION,
@@ -118,7 +120,7 @@ function endGame() {
     gameStarted = false;
     FIRST_WAVE = true;
     SECOND_WAVE = false;
-    BOSS = false;
+    BOSS_STAGE = false;
     stage = new PIXI.Container();
 }
 

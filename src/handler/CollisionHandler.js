@@ -28,6 +28,13 @@ class CollisionHandler {
         }
     }
 
+    static damageBossIfHit(enemy, playerProjectile) {
+        if (CollisionHandler.hitBoxesIntersect(enemy.sprite.hitArea, playerProjectile.sprite.hitArea)) {
+            BOSS_HEALTH--;
+            console.log(BOSS_HEALTH);
+        }
+    }
+
     static explode(enemy) {
         let radius = 10;
         let steps = 10;

@@ -6,6 +6,11 @@ class Projectile {
         this.sprite.position.set(x + xCoordinateOffset, y);
         this.sprite.hitArea = new PIXI.Rectangle(this.sprite.position.x, this.sprite.position.y, hitboxWidth, hitboxHeight);
 
+        if (PUMPKIN_SPRITE === spritePath || PUMPKIN_2_SPRITE === spritePath) {
+            this.sprite.scale.set(0.5, 0.5);
+            this.sprite.hitArea = new PIXI.Rectangle(this.sprite.position.x, this.sprite.position.y, 40, 40);
+        }
+
         this.speed = speed;
 
         stage.addChild(this.sprite);
