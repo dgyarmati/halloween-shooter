@@ -2,6 +2,7 @@ body {
     margin: 0;
     text-align: center;
     overflow: hidden;
+    color: #FFFFFF;
 }
 
 .overlay {
@@ -13,7 +14,7 @@ body {
     line-height: 90vh;
     top: 0;
     left: 0;
-    font-family: "Lucida Console";
+    font-family: "Showcard Gothic";
     font-size: 4vh;
     -webkit-animation: fadeout 2s; /* Safari, Chrome and Opera > 12.1 */
     -moz-animation: fadeout 2s; /* Firefox < 16 */
@@ -43,7 +44,7 @@ body {
     height: 100%;
     top: 0;
     left: 0;
-    font-family: "Lucida Console";
+    font-family: "Showcard Gothic";
     font-size: 5vh;
 }
 
@@ -56,8 +57,8 @@ body {
     line-height: 90vh;
     top: 0;
     left: 0;
-    font-family: "Lucida Console";
     font-size: 4vh;
+    font-family: "Showcard Gothic";
     cursor: default;
 }
 

@@ -6,8 +6,7 @@ class BackgroundHandler {
         window.setInterval(function () {
             for (let i = 0; i < 10; i++) {
                 this.star = (Math.random() > 0.5 ? new PIXI.Sprite(PIXI.loader.resources[STARS_1_SPRITE].texture) : new PIXI.Sprite(PIXI.loader.resources[STARS_2_SPRITE].texture));
-                this.star.anchor.set(0.5, 0.5);
-                this.star.position.set(renderer.width * 1.3, renderer.height * Math.random());
+                this.star.position.set(renderer.width, renderer.height * Math.random());
 
                 let minScale = 0.2;
                 let maxScale = 1.2;
