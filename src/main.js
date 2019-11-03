@@ -1,3 +1,4 @@
+const MOON = "assets/moon_crescent.png";
 const STARS_1_SPRITE = "assets/stars.png";
 const STARS_2_SPRITE = "assets/stars_2.png";
 const PLAYER_SPRITE = "assets/player.png";
@@ -14,6 +15,7 @@ let collisionHandler;
 let gameCleanupInterval;
 
 PIXI.loader.add([
+    MOON,
     STARS_1_SPRITE,
     STARS_2_SPRITE,
     PLAYER_SPRITE,
